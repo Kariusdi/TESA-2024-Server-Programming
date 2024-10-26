@@ -28,8 +28,8 @@ async def message(client, topic, payload, qos, properties):
 @fast_mqtt.subscribe("tgr2024/THE_LIAM/btn_evt")
 async def message_to_topic(client, topic, payload, qos, properties):
     data = json.loads(payload)
-    h = data["height"]
-    id = data["id"]
+    # h = data["height"]
+    # id = data["id"]
     print(data)
 
     # date = datetime.datetime.now()
@@ -46,7 +46,7 @@ async def message_to_topic(client, topic, payload, qos, properties):
     # waterhieghtdata: WaterHeightSchema = all_data
     # await add_water(waterhieghtdata)
 
-    print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
+    # print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
         
 @fast_mqtt.on_disconnect()
 def disconnect(client, packet, exc=None):
