@@ -27,6 +27,7 @@ const LoginPage: FC = () => {
             width={100}
             height={100}
             quality={100}
+            // placeholder="blur"
             className="absolute w-full h-full object-cover z-0 rounded-tl-[25px] rounded-bl-[25px]"
           />
           <div className="absolute h-full w-full bg-black opacity-70 z-10 rounded-tl-[25px] rounded-bl-[25px]"></div>
