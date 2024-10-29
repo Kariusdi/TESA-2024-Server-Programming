@@ -15,7 +15,6 @@ const LoginPage: FC = () => {
   const router = useRouter();
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
