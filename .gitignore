@@ -1,2 +1,4 @@
 .env
 mongodb
+__pycache__/
+*.pyc
