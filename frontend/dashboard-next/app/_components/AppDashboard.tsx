@@ -1,18 +1,12 @@
 "use client";
 
 import { FC } from "react";
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 import AppKPI from "./AppKPI";
 import AppHeader from "./AppHeader";
 import AppGraph from "./AppGraph";
 import AppSubHeader from "./AppSubheader";
+import Clock from "@/assets/clock.png";
+import Image from "next/image";
 
 const data = [
   {
@@ -88,6 +82,10 @@ const AppDashboard: FC = () => {
       </div>
       <AppSubHeader title="Machine Sound Sensoring" />
       <div className="shadow-md rounded-[20px] bg-white p-5 mt-5 mb-5">
+        <div className="flex justify-center items-center space-x-1.5">
+          <Image src={Clock} alt="clock" width={10} height={10} />
+          <p className="text-[12px] text-gray-500">updated 3 mins ago</p>
+        </div>
         <AppGraph />
       </div>
       <div className="flex justify-center items-center mt-10">
