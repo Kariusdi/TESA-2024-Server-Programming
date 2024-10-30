@@ -12,12 +12,14 @@ const AppDashboard = dynamic(() => import("../_components/AppDashboard"), {
 const DashboardPage = () => {
   return (
     <main className="flex">
-      <div className="h-screen w-[220px]" />
+      <div className="h-screen w-[220px] flex-shrink" />
       <div className="fixed">
         <AppMenu />
       </div>
-      <AppDashboard />
-      <div className="h-screen w-[220px]" />
+      <div className="flex flex-grow justify-center items-center">
+        <AppDashboard />
+      </div>
+      <div className="h-screen w-[220px] flex-shrink" />
       <div className="fixed right-0 top-0 h-screen overflow-hidden">
         <div className="h-full overflow-auto">
           <AppSummary />
