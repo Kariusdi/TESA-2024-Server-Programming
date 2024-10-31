@@ -2,3 +2,4 @@
 mongodb
 __pycache__/
 *.pyc
+plots
