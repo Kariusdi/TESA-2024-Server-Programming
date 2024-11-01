@@ -4,11 +4,13 @@ export interface ImageLoaderProps {
   quality?: number;
 }
 
-interface SensorData {
+export interface SensorData {
   name: string;
-  uv: number;
-  pv: number;
-  amt: number;
+  timestamp: string;
+  hour: string;
+  minute: string;
+  date: string;
+  sensorValue: number;
 }
 
 export interface AppKPIGraphProps {
@@ -17,6 +19,6 @@ export interface AppKPIGraphProps {
 
 export interface AppKPIProps {
   name: string;
-  value: number;
-  time: string;
+  timestamp: string;
+  sensorValue: number;
 }

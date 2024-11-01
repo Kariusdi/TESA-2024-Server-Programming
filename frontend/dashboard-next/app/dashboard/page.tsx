@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import AppMenu from "../_components/AppMenu";
 // import AppDashboard from "../_components/AppDashboard";
@@ -16,10 +15,10 @@ const DashboardPage = () => {
       <div className="fixed">
         <AppMenu />
       </div>
-      <div className="flex flex-grow justify-center items-center">
+      <div className="flex flex-grow justify-center items-start">
         <AppDashboard />
       </div>
-      <div className="h-screen w-[220px] flex-shrink" />
+      <div className="h-screen w-[240px] flex-shrink" />
       <div className="fixed right-0 top-0 h-screen overflow-hidden">
         <div className="h-full overflow-auto">
           <AppSummary />

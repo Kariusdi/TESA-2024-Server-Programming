@@ -2,16 +2,22 @@ from typing import Optional
 from pydantic import BaseModel, Field
 
 class SensorDataSchema(BaseModel):
-    timestamp: str = Field(...)
+    name: str = Field(...)
+    timestamp: str = Field(...),
+    hour: str = Field(...),
+    minute: str = Field(...),
+    date: str = Field(...),
     sensorValue: int = Field(..., ge=0.0)
-    updatedTime: int = Field(..., ge=1.0)
     
     class Config:
         json_schema_extra = {
             "example": {
-                "timestamp": "09:10",
-                "sensorValue": 4756,
-                "updatedTime": 3
+                "name": "Machine 1",
+                "timestamp": "2024-10-12 10:51:43.794039",
+                "hour": "09",
+                "minute": "10",
+                "date": "2024-10-25",
+                "sensorValue": 4756
             }
         }
 
@@ -28,16 +34,19 @@ class HealthStatusSchema(BaseModel):
         }
 
 class UpdateSensorDataSchema(BaseModel):
+    name: Optional[str]
     timestamp: Optional[str]
     sensorValue: Optional[int]
-    updatedTime: Optional[int]
     
     class Config:
         json_schema_extra = {
             "example": {
-                "timestamp": "09:10",
-                "sensorValue": 4756,
-                "updatedTime": 3
+                "name": "Machine 1",
+                "timestamp": "2024-10-12 10:51:43.794039",
+                "hour": "09",
+                "minute": "10",
+                "date": "2024-10-25",
+                "sensorValue": 4756
             }
         }
     
@@ -49,5 +58,5 @@ def SuccessResponseModel(data, message):
     }
 
 
-def ErrorResponseModel(error, code, message):
-    return {"error": error, "code": 404, "message": message}
+def ErrorResponseModel(error, message):
+    return {"error": error, "code": 500, "message": message}

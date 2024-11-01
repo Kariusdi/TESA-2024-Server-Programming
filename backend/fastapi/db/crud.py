@@ -13,13 +13,16 @@ sensors_collection = database.get_collection("sensors_collection")
 def sensor_helper(sensor) -> dict:
     return {
         "id": str(sensor["_id"]),
+        "name": sensor["name"],
         "timestamp": sensor["timestamp"],
-        "sensorValue": sensor["sensorValue"],
-        "updatedTime": sensor["updatedTime"]
+        "hour": sensor["hour"],
+        "minute": sensor["minute"],
+        "date": sensor["date"],
+        "sensorValue": sensor["sensorValue"]
     }
 
-async def create(water_data: dict) -> dict:
-    sensor = await sensors_collection.insert_one(water_data)
+async def create(sensor_data: dict) -> dict:
+    sensor = await sensors_collection.insert_one(sensor_data)
     new_sensor = await sensors_collection.find_one({"_id": sensor.inserted_id})
     return sensor_helper(new_sensor)
 
