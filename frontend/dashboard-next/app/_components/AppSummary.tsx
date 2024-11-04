@@ -3,19 +3,11 @@ import { FC, useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import AppHealthStatus from "./AppHealthStatus";
 import { socket } from "@/utils/socket";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const AppSummary: FC = () => {
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [machineStatus, setMachineStatus] = useState<
-    { id: number; status: number }[]
-  >([
-    { id: 1, status: 404 },
-    { id: 2, status: 404 },
-    { id: 3, status: 404 },
-    { id: 4, status: 404 },
-    { id: 5, status: 404 },
-    { id: 6, status: 404 },
-  ]);
+  const { machineStatus, setMachineStatus } = useLocalStorage();
 
   useEffect(() => {
     function onConnect() {
