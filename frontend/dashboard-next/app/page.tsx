@@ -22,7 +22,7 @@ const LoginPage: FC = () => {
   const formSubmit = useCallback(
     (data: FormData) => {
       if (data.username === "admin" && data.password === "1q2w3e4r") {
-        router.push("/dashboard");
+        router.push("/main/dashboard");
       } else {
         setNotMatched(true);
       }

@@ -5,17 +5,19 @@ import Image from "next/image";
 import Linear from "@/assets/trending-up.png";
 import Dashboard from "@/assets/layers.png";
 import Trello from "@/assets/trello.png";
-import Share from "@/assets/share.png";
 import User from "@/assets/user.png";
+import { usePathname, useRouter } from "next/navigation";
 
 const menuList = [
-  { title: "Dashboard", icon: Dashboard },
-  { title: "Past Data", icon: Trello },
-  { title: "Export Summary", icon: Share },
+  { title: "Dashboard", icon: Dashboard, path: "/main/dashboard" },
+  { title: "Maintenance Logs", icon: Trello, path: "/main/maintenancelogs" },
+  // { title: "Export Summary", icon: Share },
 ];
 
 const AppMenu: FC = () => {
-  const [selectedMenu, setSelectedMenu] = useState<string>("Dashboard");
+  const router = useRouter();
+  const pathname = usePathname();
+  const [selectedMenu, setSelectedMenu] = useState<string>(pathname);
   return (
     <aside className="h-screen w-[220px] p-3">
       <div className="bg-[#34150F] h-full w-full flex flex-col justify-between items-center p-2 rounded-[10px]">
@@ -40,8 +42,11 @@ const AppMenu: FC = () => {
               <div
                 key={idx}
                 className={`flex justify-start items-center space-x-5 transition-all duration-200 ${
-                  selectedMenu === ele.title ? "bg-[#F85F3F]" : "bg-[#34150F]"
+                  selectedMenu === ele.path ? "bg-[#F85F3F]" : "bg-[#34150F]"
                 } p-3 rounded-[10px] text-sm`}
+                onClick={() => {
+                  router.push(ele.path);
+                }}
               >
                 <Image
                   src={ele.icon}
@@ -53,7 +58,7 @@ const AppMenu: FC = () => {
                 <li
                   key={idx + 2}
                   className="font-bold text-white cursor-pointer"
-                  onClick={() => setSelectedMenu(ele.title)}
+                  onClick={() => setSelectedMenu(ele.path)}
                 >
                   {ele.title}
                 </li>
