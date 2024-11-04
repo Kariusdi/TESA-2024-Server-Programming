@@ -9,8 +9,7 @@ const AppDashboard = dynamic(() => import("../_components/AppDashboard"), {
 
 const DashboardPage = () => {
   return (
-    <main className="flex">
-      {/* <div className="z-10 absolute bg-black opacity-50 h-full w-full"></div> */}
+    <main className="flex relative">
       <div className="h-screen w-[220px] flex-shrink" />
       <div className="fixed">
         <AppMenu />
