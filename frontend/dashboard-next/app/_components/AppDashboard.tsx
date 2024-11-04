@@ -1,13 +1,11 @@
 "use client";
 
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import AppKPI from "./AppKPI";
+import { FC, useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import AppGraph from "./AppGraph";
 import AppSubHeader from "./AppSubheader";
 import Clock from "@/assets/clock.png";
 import Image from "next/image";
-import { useSensors } from "@/hooks/useSensors";
 import AppStatusMap from "./AppStatusMap";
 import { socket } from "@/utils/socket";
 
@@ -15,6 +13,7 @@ const AppDashboard: FC = () => {
   // const { data: sensorDatas, error, isLoading, isValidating } = useSensors();
 
   const [isConnected, setIsConnected] = useState(socket.connected);
+  const [timer, setTimer] = useState<number>(0);
   const [machineStatus, setMachineStatus] = useState<
     { id: number; status: number }[]
   >([
@@ -25,6 +24,7 @@ const AppDashboard: FC = () => {
     { id: 5, status: 404 },
     { id: 6, status: 404 },
   ]);
+  const [trigger, setTrigger] = useState<boolean>(false);
 
   useEffect(() => {
     function onConnect() {
@@ -39,7 +39,9 @@ const AppDashboard: FC = () => {
     socket.on("disconnect", onDisconnect);
     // socket.on("join", onFooEvent);
     socket.on("machine_status", (data) => {
+      setTrigger(true);
       setMachineStatus(data);
+      setTimer(0);
     });
 
     return () => {
@@ -47,9 +49,17 @@ const AppDashboard: FC = () => {
       socket.off("disconnect", onDisconnect);
       socket.off("machine_status", (data) => {
         setMachineStatus(data["data"]);
+        setTimer(0);
       });
     };
-  }, []);
+  }, [timer]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 60000);
+    return () => clearInterval(interval);
+  }, [machineStatus]);
 
   return (
     <section className="py-2 px-3 flex flex-col justify-start items-start overflow-auto">
@@ -65,6 +75,40 @@ const AppDashboard: FC = () => {
             : "Critical"}
         </p>
       ))} */}
+      <div
+        className={`flex justify-center items-center space-x-1.5 mb-2 transition-all duration-700 ${
+          trigger === true ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        {trigger === true && timer !== 0 ? (
+          <>
+            <Image src={Clock} alt="clock" width={10} height={10} />
+            <p className="text-[12px] text-gray-500">
+              updated {timer} {timer === 1 ? "min" : "mins"} ago
+            </p>
+          </>
+        ) : trigger === true && timer === 0 ? (
+          <>
+            <Image src={Clock} alt="clock" width={10} height={10} />
+            <p className="text-[12px] text-gray-500">
+              updated just a moment ago
+            </p>
+          </>
+        ) : (
+          <>
+            <Image
+              src={Clock}
+              alt="clock"
+              width={10}
+              height={10}
+              className="opacity-0"
+            />
+            <p className="text-[12px] text-gray-500 opacity-0">
+              updated just a moment ago
+            </p>
+          </>
+        )}
+      </div>
       <AppStatusMap statusSet={machineStatus} />
       <div className="mt-10"></div>
       <AppSubHeader title="Machine Sound Sensoring" />

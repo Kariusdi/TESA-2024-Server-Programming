@@ -63,7 +63,7 @@ const AppStatusMap: FC<AppStatusMapProps> = ({ statusSet }) => {
       <Image
         src={Industry}
         alt="industry"
-        className="w-full h-full rounded-2xl"
+        className="w-full h-full rounded-2xl shadow-lg"
         quality={100}
       />
       {s.map((ele, idx) => (
@@ -110,7 +110,7 @@ const PinStatus: FC<PinStatusProps> = ({
             <div
               className={`h-fit w-full ${
                 status === 0 || status === -1 ? "text-black" : "text-white"
-              } text-white text-center p-1 rounded-md font-bold ${statusColor} transition-all duration-700`}
+              } text-center p-1 rounded-md font-bold ${statusColor} transition-all duration-700`}
             >
               <p>
                 {status === 0
