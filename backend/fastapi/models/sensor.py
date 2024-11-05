@@ -22,14 +22,16 @@ class SensorDataSchema(BaseModel):
         }
 
 class HealthStatusSchema(BaseModel):
-    name: str = Field(...)
-    status: int = Field(..., ge=0)
+    id: int = Field(..., ge=0)
+    status: int = Field(..., ge=-1)
+    date: str = Field(...)
     
     class Config:
         json_schema_extra = {
             "example": {
-                "name": "Machine 1",
-                "status": 0
+                "id": 1,
+                "status": 0,
+                "date": "05/11/2024 12:01:04+07:00Z"
             }
         }
 
@@ -56,7 +58,13 @@ def SuccessResponseModel(data, message):
         "code": 200,
         "message": message,
     }
-
+    
+def SuccessResponseModelList(data, message):
+    return {
+        "data": data,
+        "code": 200,
+        "message": message,
+    }
 
 def ErrorResponseModel(error, message):
     return {"error": error, "code": 500, "message": message}

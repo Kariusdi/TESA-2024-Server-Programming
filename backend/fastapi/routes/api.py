@@ -1,4 +1,5 @@
 import json
+from typing import List
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
@@ -10,11 +11,13 @@ from models.sensor import (
     HealthStatusSchema,
     UpdateSensorDataSchema,
     SuccessResponseModel,
+    SuccessResponseModelList,
     ErrorResponseModel
 )
 
 from db.crud import (
     create,
+    create_status,
     retrieve,
     retrieve_id,
     update,
@@ -22,6 +25,16 @@ from db.crud import (
 )
 
 router = APIRouter()
+
+@router.post("/create/maintenance/logs", response_description="Create Maintenance Logs Data")
+async def create_maintenance_logs(status: List[HealthStatusSchema] = Body(...)):
+    created_statuses = []
+    for status_item in status:
+        status_analyzer = jsonable_encoder(status_item) 
+        new_status = await create_status(status_analyzer)
+        created_statuses.append(new_status) 
+
+    return SuccessResponseModelList(data=created_statuses, message="Status Added Successfully.")
 
 @router.post("/create", response_description="Create Sensor Data")
 async def create_sensors(sensor: SensorDataSchema = Body(...)):
@@ -37,7 +50,7 @@ async def retrieve_sensors():
     return ErrorResponseModel(sensors_data, "This Collection is Empty.")
 
 @router.get("/retrieve/{id}", response_description="Retrieve A Sensor Data by Id")
-async def retrive_sensor_byID(id):
+async def retrive_sensor_by_ID(id):
     sensor = await retrieve_id(id)
     if sensor:
         return SuccessResponseModel(sensor, "A Sensor Data Retrieved Successfully.")

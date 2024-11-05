@@ -63,7 +63,7 @@ const AppStatusMap: FC<AppStatusMapProps> = ({ statusSet }) => {
       <Image
         src={Industry}
         alt="industry"
-        className="w-full h-full rounded-2xl shadow-lg"
+        className="w-full h-full rounded-2xl drop-shadow-lg"
         quality={100}
       />
       {s.map((ele, idx) => (

@@ -9,6 +9,7 @@ client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 database = client.machines_data
 
 sensors_collection = database.get_collection("sensors_collection")
+status_collection = database.get_collection("status_collection")
 
 def sensor_helper(sensor) -> dict:
     return {
@@ -20,6 +21,19 @@ def sensor_helper(sensor) -> dict:
         "date": sensor["date"],
         "sensorValue": sensor["sensorValue"]
     }
+    
+def status_helper(status) -> dict:
+    return {
+        "_id": str(status["_id"]),
+        "id": status["id"],
+        "status": status["status"],
+        "date": status["date"]
+    }
+    
+async def create_status(status_data: dict) -> dict:
+    status = await status_collection.insert_one(status_data)
+    new_status = await status_collection.find_one({"_id": status.inserted_id})
+    return status_helper(new_status)
 
 async def create(sensor_data: dict) -> dict:
     sensor = await sensors_collection.insert_one(sensor_data)

@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(MqttRouter, tags=["MQTT"],prefix="/mqtt")
-app.include_router(SensorRouter, tags=["Sensor"],prefix="/sensor")
+app.include_router(SensorRouter, tags=["Machine Sensor and Status"],prefix="/sensor")
 app.mount('/sockets', app=sio_app)
 
 @app.get("/", tags=["Root"])

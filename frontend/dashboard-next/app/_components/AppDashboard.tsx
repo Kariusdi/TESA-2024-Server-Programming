@@ -8,9 +8,12 @@ import Image from "next/image";
 import AppStatusMap from "./AppStatusMap";
 import { socket } from "@/utils/socket";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import dayjs from "dayjs";
+import { useStatus } from "@/hooks/useStatus";
 
 const AppDashboard: FC = () => {
   // const { data: sensorDatas, error, isLoading, isValidating } = useSensors();
+  const { handlePoster } = useStatus();
   const [timer, setTimer] = useState<number>(0);
   const { machineStatus, setMachineStatus } = useLocalStorage();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -63,7 +66,18 @@ const AppDashboard: FC = () => {
         !maintenaceTrigger.some((item) => item.id === ele.id)
     );
     if (newTriggers.length > 0) {
-      setMaintenaceTrigger((prev) => [...prev, ...newTriggers]);
+      setMaintenaceTrigger((prev) => [...newTriggers]);
+      const updatedData = newTriggers.map((item) => ({
+        ...item,
+        date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
+      }));
+      console.log(updatedData);
+      const postData = async () => {
+        await handlePoster(updatedData);
+      };
+      postData();
+
+      console.log("Done Post Maintenance Data");
       setModalOpen(true);
     } else {
       setMaintenaceTrigger([]);
@@ -98,7 +112,7 @@ const AppDashboard: FC = () => {
                 )}
               </h1>
               <h3 className="text-[32px] bg-[#F8A23F] rounded-lg leading-loose">
-                Need Maintenance
+                Needs Maintenance
               </h3>
             </div>
           </div>

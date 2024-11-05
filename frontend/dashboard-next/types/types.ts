@@ -13,6 +13,12 @@ export interface SensorData {
   sensorValue: number;
 }
 
+export interface StatusData {
+  id: number;
+  status: number;
+  date: string;
+}
+
 export interface AppKPIGraphProps {
   data: SensorData[];
 }

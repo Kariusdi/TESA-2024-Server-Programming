@@ -4,8 +4,12 @@ import useSWR from "swr";
 
 export const useSensors = () => {
   const { data, error, isLoading, isValidating } = useSWR<SensorData[]>(
-    "http://127.0.0.1:8000/sensor/retrieve",
-    fetcher
+    "http://127.0.0.1:80/sensor/retrieve",
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    }
   );
 
   return {
