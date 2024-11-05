@@ -35,6 +35,20 @@ class HealthStatusSchema(BaseModel):
             }
         }
 
+class UpdateHealthStatusSchema(BaseModel):
+    id: Optional[int]
+    status: Optional[int]
+    date: Optional[str]
+    
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "id": 1,
+                "status": 0,
+                "date": "05/11/2024 12:01:04+07:00Z"
+            }
+        }
+
 class UpdateSensorDataSchema(BaseModel):
     name: Optional[str]
     timestamp: Optional[str]

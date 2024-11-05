@@ -1,11 +1,11 @@
-import { StatusData } from "@/types/types";
+import { StatusData, StatusDataNoId } from "@/types/types";
+import { status_fetcher } from "@/utils/methods";
+import useSWR from "swr";
 
-const endpoint = "http://127.0.0.1:80/sensor/create/maintenance/logs";
-
-export const useStatus = () => {
-  const handlePoster = async (body?: StatusData[]) => {
+export const usePostStatus = () => {
+  const handlePoster = async (body?: StatusDataNoId[]) => {
     try {
-      await fetch(endpoint, {
+      await fetch("http://127.0.0.1:80/sensor/create/maintenance/logs", {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
@@ -19,5 +19,44 @@ export const useStatus = () => {
 
   return {
     handlePoster,
+  };
+};
+
+export const useUpdateStatus = () => {
+  const handleUpdater = async (body?: StatusDataNoId, _id?: string) => {
+    console.log(body);
+    try {
+      await fetch(`http://127.0.0.1:80/sensor/update/maintenance/logs/${_id}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }).then((response) => response.json());
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
+  };
+
+  return {
+    handleUpdater,
+  };
+};
+
+export const useStatus = () => {
+  const { data, error, isLoading, isValidating } = useSWR<StatusData[]>(
+    "http://127.0.0.1:80/sensor/retrieve/maintenance/logs",
+    status_fetcher,
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    }
+  );
+
+  return {
+    isLoading,
+    isValidating,
+    data,
+    error,
   };
 };

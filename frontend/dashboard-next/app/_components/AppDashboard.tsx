@@ -9,11 +9,13 @@ import AppStatusMap from "./AppStatusMap";
 import { socket } from "@/utils/socket";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import dayjs from "dayjs";
-import { useStatus } from "@/hooks/useStatus";
+import { usePostStatus } from "@/hooks/useStatus";
+import { useSensors } from "@/hooks/useSensors";
+import AppKPI from "./AppKPI";
 
 const AppDashboard: FC = () => {
   // const { data: sensorDatas, error, isLoading, isValidating } = useSensors();
-  const { handlePoster } = useStatus();
+  const { handlePoster } = usePostStatus();
   const [timer, setTimer] = useState<number>(0);
   const { machineStatus, setMachineStatus } = useLocalStorage();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -40,7 +42,7 @@ const AppDashboard: FC = () => {
       localStorage.setItem("latestStatus", JSON.stringify(data));
     });
 
-    machineStatus[0].status === 404 && trigger !== true && setTrigger(true);
+    // machineStatus[0].status === 404 && trigger !== true && setTrigger(true);
 
     return () => {
       socket.off("connect", onConnect);
@@ -65,6 +67,7 @@ const AppDashboard: FC = () => {
         ele.status === -1 &&
         !maintenaceTrigger.some((item) => item.id === ele.id)
     );
+    console.log(newTriggers);
     if (newTriggers.length > 0) {
       setMaintenaceTrigger((prev) => [...newTriggers]);
       const updatedData = newTriggers.map((item) => ({
@@ -72,18 +75,19 @@ const AppDashboard: FC = () => {
         date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
       }));
       console.log(updatedData);
-      const postData = async () => {
-        await handlePoster(updatedData);
-      };
-      postData();
-
-      console.log("Done Post Maintenance Data");
-      setModalOpen(true);
+      if (trigger === true) {
+        const postData = async () => {
+          await handlePoster(updatedData);
+        };
+        postData();
+        console.log("Done Post Maintenance Data");
+        setModalOpen(true);
+      }
     } else {
       setMaintenaceTrigger([]);
       setModalOpen(false);
     }
-  }, [machineStatus]);
+  }, [machineStatus, trigger]);
 
   return (
     <>
@@ -122,9 +126,7 @@ const AppDashboard: FC = () => {
         <AppHeader title="Predictive Maintenance Dashboard" />
         <div className="mt-10"></div>
         <div
-          className={`flex justify-center items-center space-x-1.5 mb-2 transition-all duration-700 ${
-            trigger === true ? "opacity-100" : "opacity-0"
-          }`}
+          className={`flex justify-center items-center space-x-1.5 mb-2 transition-all duration-700`}
         >
           {trigger === true && timer !== 0 ? (
             <>
@@ -147,10 +149,10 @@ const AppDashboard: FC = () => {
                 alt="clock"
                 width={10}
                 height={10}
-                className="opacity-0"
+                className="opacity-100"
               />
-              <p className="text-[12px] text-gray-500 opacity-0">
-                updated just a moment ago
+              <p className="text-[12px] text-gray-500 opacity-100">
+                data from latest data
               </p>
             </>
           )}

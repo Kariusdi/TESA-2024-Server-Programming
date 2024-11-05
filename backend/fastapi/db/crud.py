@@ -35,6 +35,23 @@ async def create_status(status_data: dict) -> dict:
     new_status = await status_collection.find_one({"_id": status.inserted_id})
     return status_helper(new_status)
 
+async def retrieve_status():
+    data = []
+    async for ele in status_collection.find():
+        data.append(status_helper(ele))
+    return data
+
+async def update_status(id: str, update_data: dict) -> bool:
+    if len(update_data) == 0:
+        return False
+    
+    status = await status_collection.find_one_and_update({"_id": ObjectId(id)}, 
+                                                          {'$set': update_data}, 
+                                                          return_document = ReturnDocument.AFTER)
+    if status:
+        return True
+    return False
+
 async def create(sensor_data: dict) -> dict:
     sensor = await sensors_collection.insert_one(sensor_data)
     new_sensor = await sensors_collection.find_one({"_id": sensor.inserted_id})

@@ -14,6 +14,13 @@ export interface SensorData {
 }
 
 export interface StatusData {
+  _id: string;
+  id: number;
+  status: number;
+  date: string;
+}
+
+export interface StatusDataNoId {
   id: number;
   status: number;
   date: string;
