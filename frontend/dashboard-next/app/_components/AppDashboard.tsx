@@ -25,6 +25,14 @@ const AppDashboard: FC = () => {
   >([]);
 
   useEffect(() => {
+    const saved_timer = localStorage.getItem("timer");
+    setTimer(Number(saved_timer));
+    if (saved_timer) {
+      setTrigger(true);
+    }
+  }, []);
+
+  useEffect(() => {
     function onConnect() {
       console.log("Connected");
     }
@@ -39,6 +47,7 @@ const AppDashboard: FC = () => {
       setTrigger(true);
       setMachineStatus(data);
       setTimer(0);
+      localStorage.setItem("timer", JSON.stringify(0));
       localStorage.setItem("latestStatus", JSON.stringify(data));
     });
 
@@ -57,9 +66,10 @@ const AppDashboard: FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => prev + 1);
+      localStorage.setItem("timer", JSON.stringify(timer + 1));
     }, 60000);
     return () => clearInterval(interval);
-  }, [machineStatus]);
+  }, [machineStatus, timer]);
 
   useEffect(() => {
     const newTriggers = machineStatus.filter(
@@ -143,18 +153,7 @@ const AppDashboard: FC = () => {
               </p>
             </>
           ) : (
-            <>
-              <Image
-                src={Clock}
-                alt="clock"
-                width={10}
-                height={10}
-                className="opacity-100"
-              />
-              <p className="text-[12px] text-gray-500 opacity-100">
-                data from latest data
-              </p>
-            </>
+            <></>
           )}
         </div>
         <AppStatusMap statusSet={machineStatus} />
