@@ -3,7 +3,7 @@ import { FC, useCallback, useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import { StatusData, StatusDataNoId } from "@/types/types";
 import { useMaintenance } from "@/hooks/useMaintenance";
-import { status_updater } from "@/utils/api_methods";
+import { status_deleter, status_updater } from "@/utils/api_methods";
 
 interface AppLogs {
   dataSource?: StatusData[];
@@ -11,8 +11,19 @@ interface AppLogs {
 
 const AppLogs: FC<AppLogs> = ({ dataSource }) => {
   const { modalOpen, setModalOpen, maintenaceDataSet } = useMaintenance();
+  const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] =
+    useState<boolean>(false);
 
-  const handleDeleteLogs = useCallback(() => {}, []);
+  useEffect(() => {
+    dataSource?.length !== 0 ? setDeleteOpen(true) : setDeleteOpen(false);
+  }, [dataSource]);
+
+  const handleDeleteLogs = useCallback(async () => {
+    await status_deleter();
+    location.reload();
+    setDeleteConfirmationOpen(false);
+  }, []);
 
   return (
     <>
@@ -47,15 +58,47 @@ const AppLogs: FC<AppLogs> = ({ dataSource }) => {
           </div>
         </>
       )}
+      {deleteConfirmationOpen && (
+        <>
+          <div className="absolute h-full w-full bg-black opacity-70 z-10" />
+          <div className="absolute left-0 top-[25%] w-full z-20 text-white font-bold flex flex-col justify-center items-center">
+            <div
+              className={`relative text-center bg-white text-black px-10 pt-10 pb-20 rounded-2xl shadow-2xl transform transition-transform duration-300 ease-in-out`}
+            >
+              <h1 className="text-[54px]">🚨</h1>
+              <h1 className="text-[64px]">Are You Sure ?</h1>
+              <h3 className="text-[32px] rounded-lg leading-loose">
+                You want to <span className="text-[#CB1202]">DELETE</span>
+              </h3>
+              <div className="flex justify-center items-center space-x-2 absolute right-2 bottom-2 mt-2">
+                <button
+                  onClick={() => setDeleteConfirmationOpen(false)}
+                  className="bg-gray-100 px-10 py-2 rounded-lg transition-all duration-300 hover:bg-gray-200 hover:shadow-inner"
+                >
+                  NO
+                </button>
+                <button
+                  onClick={() => handleDeleteLogs()}
+                  className="bg-[#f85f3f] px-10 py-2 text-white rounded-lg transition-all duration-300 hover:bg-black hover:shadow-inner hover:text-[#f85f3f]"
+                >
+                  YES
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
       <section className="py-2 px-3 flex flex-col justify-start items-start w-full mx-10">
         <div className="flex justify-between items-center w-full">
           <AppHeader title={"Maintenance Logs"} />
-          <button
-            onClick={() => console.log("Delete")}
-            className="mt-5 text-white font-bold bg-[#CB1202] rounded-md p-2 transition-all duration-300 hover:bg-[#2e110f] hover:shadow-inner"
-          >
-            Delete
-          </button>
+          {deleteOpen && (
+            <button
+              onClick={() => setDeleteConfirmationOpen(true)}
+              className="mt-5 text-white font-bold bg-[#f85f3f] rounded-md px-10 py-2 transition-all duration-300 hover:bg-black hover:shadow-inner hover:text-[#f85f3f]"
+            >
+              Delete
+            </button>
+          )}
         </div>
         <div className="mt-10"></div>
         {dataSource?.length !== 0 ? (
@@ -69,7 +112,7 @@ const AppLogs: FC<AppLogs> = ({ dataSource }) => {
             />
           ))
         ) : (
-          <p>There's no logs here...</p>
+          <p>There's no logs yet...</p>
         )}
       </section>
     </>
@@ -80,6 +123,9 @@ const Logs: FC<StatusData> = ({ id, status, date, _id }) => {
   const [statusLabel, setStatusLabel] = useState(() => {
     return status === -1 ? "Needs Maintenance" : "Good";
   });
+  const [loader, setLoader] = useState<boolean>(false);
+  const [doneConfirmationOpen, setDoneConfirmationOpen] =
+    useState<boolean>(false);
 
   const updateStatus = useCallback(
     async (id: number, status: number, date: string, _id: string) => {
@@ -88,8 +134,13 @@ const Logs: FC<StatusData> = ({ id, status, date, _id }) => {
         status: 0,
         date,
       };
+      setLoader(true);
       await status_updater(_id, updated_data);
-      setStatusLabel("Good");
+      setTimeout(() => {
+        setStatusLabel("Good");
+        setLoader(false);
+        setDoneConfirmationOpen(false);
+      }, 700);
     },
     [_id]
   );
@@ -113,13 +164,39 @@ const Logs: FC<StatusData> = ({ id, status, date, _id }) => {
           {statusLabel}
         </p>
       </div>
-      <div className="flex justify-center items-center">
-        <button
-          onClick={() => updateStatus(id, status, date, _id)}
-          className="font-bold bg-gray-100 rounded-md p-2 transition-all duration-300 translate-y-0 hover:-translate-y-1 hover:bg-[#23CB02] hover:text-white"
-        >
-          Done ✅
-        </button>
+      <div className="flex justify-center items-center transition-all duration-300">
+        {/* {statusLabel !== "Good" } */}
+        {!doneConfirmationOpen && loader === false && statusLabel !== "Good" ? (
+          <button
+            onClick={() => setDoneConfirmationOpen(true)}
+            className="font-bold bg-gray-100 rounded-md p-2 transition-all duration-300 translate-y-0 hover:-translate-y-1 hover:bg-[#23CB02] hover:text-white"
+          >
+            <p>Done ✅</p>
+          </button>
+        ) : doneConfirmationOpen &&
+          loader === false &&
+          statusLabel !== "Good" ? (
+          <div className="flex justify-center items-center space-x-1 font-bold">
+            <p className="mr-2">Sure?</p>
+            <button
+              onClick={() => setDoneConfirmationOpen(false)}
+              className="bg-gray-100 p-2 rounded-md transition-all duration-300 hover:bg-gray-200"
+            >
+              No
+            </button>
+
+            <button
+              onClick={() => updateStatus(id, status, date, _id)}
+              className="bg-[#23CB02] text-white p-2 rounded-md transition-all duration-300 hover:bg-black hover:shadow-inner hover:text-[#23CB02]"
+            >
+              Yes
+            </button>
+          </div>
+        ) : loader ? (
+          <div className="loader"></div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

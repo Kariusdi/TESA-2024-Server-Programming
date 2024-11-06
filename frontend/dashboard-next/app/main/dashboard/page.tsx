@@ -11,12 +11,6 @@ const DashboardPage = () => {
   return (
     <>
       <AppDashboard />
-      <div className="h-screen w-[240px] flex-shrink" />
-      <div className="fixed right-0 top-0 h-screen overflow-hidden">
-        <div className="h-full overflow-auto">
-          <AppSummary />
-        </div>
-      </div>
     </>
   );
 };
