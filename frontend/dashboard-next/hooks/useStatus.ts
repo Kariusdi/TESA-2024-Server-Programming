@@ -1,5 +1,5 @@
 import { StatusData, StatusDataNoId } from "@/types/types";
-import { status_fetcher } from "@/utils/methods";
+import { status_fetcher, status_updater } from "@/utils/api_methods";
 import useSWR from "swr";
 
 export const usePostStatus = () => {
@@ -43,13 +43,14 @@ export const useUpdateStatus = () => {
   };
 };
 
-export const useStatus = () => {
+export const useFetchStatus = () => {
   const { data, error, isLoading, isValidating } = useSWR<StatusData[]>(
     "http://127.0.0.1:80/sensor/retrieve/maintenance/logs",
     status_fetcher,
     {
-      revalidateOnFocus: false,
-      shouldRetryOnError: false,
+      revalidateOnFocus: true,
+      revalidateIfStale: true,
+      revalidateOnMount: true,
     }
   );
 

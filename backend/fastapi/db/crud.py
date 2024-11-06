@@ -52,6 +52,12 @@ async def update_status(id: str, update_data: dict) -> bool:
         return True
     return False
 
+async def delete_all_status() -> bool:
+    status = await status_collection.delete_many({})
+    if status:
+        return True
+    return False
+
 async def create(sensor_data: dict) -> dict:
     sensor = await sensors_collection.insert_one(sensor_data)
     new_sensor = await sensors_collection.find_one({"_id": sensor.inserted_id})

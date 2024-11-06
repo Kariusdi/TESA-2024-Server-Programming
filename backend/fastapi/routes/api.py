@@ -24,6 +24,7 @@ from db.crud import (
     retrieve_id,
     update,
     update_status,
+    delete_all_status,
     delete
 )
 
@@ -58,6 +59,19 @@ async def update_status_by_ID(id, update_data: UpdateHealthStatusSchema = Body(.
     return ErrorResponseModel(
         updated_data,
         "An Error Occurred, Data with id {0} doesn't exist".format(id)
+    )
+
+@router.delete("/delete/maintenance/logs", response_description="Delete All Status Data")
+async def update_status_by_ID():
+    delete_data = await delete_all_status()
+    if delete_data:
+        return SuccessResponseModel(
+            delete_data,
+            "Status Data is Deleted Successfully".format(id),
+        )
+    return ErrorResponseModel(
+        delete_data,
+        "An Error Occurred"
     )
     
 @router.post("/create", response_description="Create Sensor Data")

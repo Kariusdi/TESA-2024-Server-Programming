@@ -1,5 +1,5 @@
 import { SensorData } from "@/types/types";
-import { sensor_fetcher } from "@/utils/methods";
+import { sensor_fetcher } from "@/utils/api_methods";
 import useSWR from "swr";
 
 export const useSensors = () => {

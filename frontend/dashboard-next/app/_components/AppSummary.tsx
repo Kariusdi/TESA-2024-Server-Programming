@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import AppHealthStatus from "./AppHealthStatus";
-import { socket } from "@/utils/socket";
+import { socket } from "@/utils/sockets";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const AppSummary: FC = () => {

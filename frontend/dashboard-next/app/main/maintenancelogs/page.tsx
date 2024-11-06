@@ -1,10 +1,10 @@
 "use client";
 import AppLogs from "@/app/_components/AppLogs";
-import { useStatus } from "@/hooks/useStatus";
-import { FC, useEffect } from "react";
+import { useFetchStatus } from "@/hooks/useStatus";
+import { FC } from "react";
 
 const MaintenanceLogsPage: FC = () => {
-  const { data, error, isLoading, isValidating } = useStatus();
+  const { data, error, isLoading, isValidating } = useFetchStatus();
   return (
     <>
       <AppLogs dataSource={data ?? []} />

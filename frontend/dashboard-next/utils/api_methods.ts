@@ -9,14 +9,14 @@ export const sensor_fetcher = (url: string): Promise<SensorData[]> =>
 export const status_fetcher = (url: string): Promise<StatusData[]> =>
   fetch(url)
     .then((res) => res.json())
-    .then((data) => data.data[0])
-    .catch((err) => console.log("Error!", err));
+    .then((data) => data.data[0] ?? [])
+    .catch((err) => console.log("Error! This Collection is Empty", err));
 
-export const status_poster = (
+export const status_poster = async (
   url: string,
   body?: object
 ): Promise<StatusData[]> =>
-  fetch(url, {
+  await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -30,16 +30,30 @@ export const status_poster = (
       throw err;
     });
 
-export const status_updater = (
+export const status_updater = async (
   url: string,
   body?: object
 ): Promise<StatusData[]> =>
-  fetch(url, {
+  await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
+  })
+    .then((res) => res.json())
+    .then((data) => data.data[0])
+    .catch((err) => {
+      console.log("Error!", err);
+      throw err;
+    });
+
+export const status_deleter = (url: string): Promise<StatusData[]> =>
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   })
     .then((res) => res.json())
     .then((data) => data.data[0])
