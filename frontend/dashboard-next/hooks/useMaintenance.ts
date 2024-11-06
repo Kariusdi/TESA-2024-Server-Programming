@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { socket } from "@/utils/sockets";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import dayjs from "dayjs";
-import { usePostStatus } from "@/hooks/useStatus";
 import { useSensors } from "@/hooks/useSensors";
 import { status_poster } from "@/utils/api_methods";
 
 export const useMaintenance = () => {
-  const { handlePoster } = usePostStatus();
   const [timer, setTimer] = useState<string>("");
   const { machineStatus, setMachineStatus } = useLocalStorage();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -59,11 +57,7 @@ export const useMaintenance = () => {
       }));
       if (trigger === true) {
         const postData = async () => {
-          // await handlePoster(updatedData);
-          await status_poster(
-            "http://127.0.0.1:80/sensor/create/maintenance/logs",
-            updatedData
-          );
+          await status_poster(updatedData);
         };
         postData();
         console.log("Done Post Maintenance Data");

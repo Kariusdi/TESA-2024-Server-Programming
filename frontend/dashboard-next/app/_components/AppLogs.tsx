@@ -2,8 +2,8 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import AppHeader from "./AppHeader";
 import { StatusData, StatusDataNoId } from "@/types/types";
-import { useUpdateStatus } from "@/hooks/useStatus";
 import { useMaintenance } from "@/hooks/useMaintenance";
+import { status_updater } from "@/utils/api_methods";
 
 interface AppLogs {
   dataSource?: StatusData[];
@@ -81,8 +81,6 @@ const Logs: FC<StatusData> = ({ id, status, date, _id }) => {
     return status === -1 ? "Needs Maintenance" : "Good";
   });
 
-  const { handleUpdater } = useUpdateStatus();
-
   const updateStatus = useCallback(
     async (id: number, status: number, date: string, _id: string) => {
       const updated_data: StatusDataNoId = {
@@ -90,8 +88,7 @@ const Logs: FC<StatusData> = ({ id, status, date, _id }) => {
         status: 0,
         date,
       };
-      console.log(updated_data, _id);
-      await handleUpdater(updated_data, _id);
+      await status_updater(_id, updated_data);
       setStatusLabel("Good");
     },
     [_id]

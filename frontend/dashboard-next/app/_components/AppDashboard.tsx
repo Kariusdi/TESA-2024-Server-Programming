@@ -6,7 +6,6 @@ import AppSubHeader from "./AppSubheader";
 import Clock from "@/assets/clock.png";
 import Image from "next/image";
 import AppStatusMap from "./AppStatusMap";
-import { usePostStatus } from "@/hooks/useStatus";
 import { useSensors } from "@/hooks/useSensors";
 import { useMaintenance } from "@/hooks/useMaintenance";
 
