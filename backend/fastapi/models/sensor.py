@@ -23,7 +23,7 @@ class SensorDataSchema(BaseModel):
 
 class HealthStatusSchema(BaseModel):
     id: int = Field(..., ge=0)
-    status: int = Field(..., ge=-1)
+    status: int = Field(..., ge=-1, le=1)
     date: str = Field(...)
     
     class Config:
