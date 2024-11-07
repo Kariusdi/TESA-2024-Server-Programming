@@ -2,7 +2,7 @@ import motor.motor_asyncio
 from bson.objectid import ObjectId
 from pymongo import ReturnDocument
 
-MONGO_DETAILS = "mongodb://admin:1q2w3e4r@127.0.0.1:27017"
+MONGO_DETAILS = "mongodb://admin:1q2w3e4r@mongodb:27017"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 

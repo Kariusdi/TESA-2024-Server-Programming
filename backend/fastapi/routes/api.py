@@ -1,10 +1,7 @@
-import json
 from typing import List
 from fastapi import APIRouter, Body
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
-import requests
-# from bson.objectid import ObjectId
 
 from models.sensor import (
     SensorDataSchema, 

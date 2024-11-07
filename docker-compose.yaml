@@ -1,0 +1,47 @@
+version: "3.7"
+name: PDM-services-application
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    container_name: mosquitto
+    ports:
+      - "1883:1883" # default mqtt port
+      - "9001:9001" # default mqtt port for websockets
+    volumes:
+      - ./backend/mosquitto/config:/mosquitto/config:rw
+      - ./backend/mosquitto/data:/mosquitto/data:rw
+      - ./backend/mosquitto/log:/mosquitto/log:rw
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    env_file:
+      - .env
+    volumes:
+      - ./backend/mongodb:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - "MONGO_INITDB_DATABASE=${MONGO_DB}"
+      - "MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}"
+      - "MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}"
+
+  services:
+    image: services:v.1
+    container_name: services
+    volumes:
+      - ./backend/fastapi:/code/fastapi
+    ports:
+      - "80:80"
+
+volumes:
+  config:
+  data:
+  log:
+
+networks:
+  db_backend:
+    driver: bridge
+  default:
+    name: mqtt-network

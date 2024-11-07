@@ -1,0 +1,8 @@
+fastapi==0.111.1
+motor==3.6.0
+uvicorn==0.30.3
+pydantic==2.8.2
+fastapi-mqtt==2.2.0
+requests==2.32.3
+python-socketio>=5.0.0
+pymongo==4.9.2
