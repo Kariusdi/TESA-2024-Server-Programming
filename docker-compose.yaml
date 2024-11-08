@@ -1,5 +1,5 @@
 version: "3.7"
-name: PDM-services-application
+name: PDM-services
 services:
   mosquitto:
     image: eclipse-mosquitto

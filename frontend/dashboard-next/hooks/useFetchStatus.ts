@@ -1,7 +1,6 @@
 import { StatusData } from "@/types/types";
 import { status_fetcher } from "@/utils/api_methods";
-import { useEffect } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 export const useFetchStatus = () => {
   const { data, error, isLoading, isValidating } = useSWR<StatusData[]>(

@@ -59,7 +59,7 @@ async def update_status_by_ID(id, update_data: UpdateHealthStatusSchema = Body(.
     )
 
 @router.delete("/delete/maintenance/logs", response_description="Delete All Status Data")
-async def update_status_by_ID():
+async def delete_status_by_ID():
     delete_data = await delete_all_status()
     if delete_data:
         return SuccessResponseModel(
