@@ -1,0 +1,20 @@
+1731383647: mosquitto version 2.0.20 starting
+1731383647: Config loaded from /mosquitto/config/mosquitto.conf.
+1731383647: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731383647: Opening ipv4 listen socket on port 1883.
+1731383647: Opening ipv6 listen socket on port 1883.
+1731383647: Opening websockets listen socket on port 9001.
+1731383647: mosquitto version 2.0.20 running
+1731383648: Expiring client d9d86b9178de486da867c4d99bdba416 due to timeout.
+1731383648: New connection from 172.20.0.3:47578 on port 1883.
+1731383648: New client connected from 172.20.0.3:47578 as 5d70d29c7b724a17bf15ca8f71b74171 (p5, c1, k60, u'LinearOnly-Karn').
+1731383746: New connection from 172.20.0.1:59658 on port 1883.
+1731383747: New client connected from 172.20.0.1:59658 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731383966: New connection from 172.20.0.1:62092 on port 1883.
+1731383966: Client postman-mqtt-client-1731383965922 disconnected, not authorised.
+1731383980: New connection from 172.20.0.1:63644 on port 1883.
+1731383980: New client connected from 172.20.0.1:63644 as postman-mqtt-client-1731383965922 (p5, c0, k60, u'LinearOnly-Idea').
+1731384090: Client mqttx_95fc35dc disconnected.
+1731384106: New connection from 172.20.0.1:64162 on port 1883.
+1731384106: New client connected from 172.20.0.1:64162 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
