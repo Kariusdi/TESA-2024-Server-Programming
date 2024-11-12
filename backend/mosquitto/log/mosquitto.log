@@ -241,3 +241,117 @@ To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
 1731399890: Saving in-memory database to /mosquitto/data//mosquitto.db.
 1731399909: Client auto-43731E9E-9A17-84BB-490C-305A8B31B636 closed its connection.
 1731399913: Client auto-49D450D2-9252-D661-EBB9-4088373E9B92 disconnected.
+1731400120: Client mqttjs_b7c8b1a6 closed its connection.
+1731400240: New client connected from ::ffff:172.20.0.1:55800 as mqttjs_1e61b973 (p2, c1, k60, u'LinearOnly-Pon').
+1731400240: New client connected from ::ffff:172.20.0.1:55808 as mqttjs_2b801ed8 (p2, c1, k60, u'LinearOnly-Pon').
+1731400336: Client mqttjs_1e61b973 closed its connection.
+1731400526: New connection from 172.20.0.1:58564 on port 1883.
+1731400526: New client connected from 172.20.0.1:58564 as auto-8A68585C-DA03-A181-6D86-ED0761B8AAEC (p2, c1, k60, u'LinearOnly-Idea').
+1731400575: Client auto-8A68585C-DA03-A181-6D86-ED0761B8AAEC closed its connection.
+1731400586: New connection from 172.20.0.1:64694 on port 1883.
+1731400586: New client connected from 172.20.0.1:64694 as auto-C040ADC3-CE74-808D-34CC-4F285B6971EA (p2, c1, k60, u'LinearOnly-Idea').
+1731400655: New connection from 172.20.0.1:62480 on port 1883.
+1731400655: New client connected from 172.20.0.1:62480 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731400944: New connection from 172.20.0.1:57658 on port 1883.
+1731400944: New client connected from 172.20.0.1:57658 as auto-F1FB1CD4-5390-198B-E832-159A2D05984F (p2, c1, k60, u'LinearOnly-Idea').
+1731400981: Client auto-C040ADC3-CE74-808D-34CC-4F285B6971EA closed its connection.
+1731400982: Client auto-F1FB1CD4-5390-198B-E832-159A2D05984F closed its connection.
+1731400994: New connection from 172.20.0.1:63722 on port 1883.
+1731400994: New client connected from 172.20.0.1:63722 as auto-4DB23DD8-332A-BA0D-7F9F-6D5E20865796 (p2, c1, k60, u'LinearOnly-Idea').
+1731400995: New connection from 172.20.0.1:63728 on port 1883.
+1731400995: New client connected from 172.20.0.1:63728 as auto-67E378D6-3CBB-43B7-74AA-C895A82D5B25 (p2, c1, k60, u'LinearOnly-Idea').
+1731401006: Client mqttjs_2b801ed8 closed its connection.
+1731401031: New client connected from ::ffff:172.20.0.1:62344 as mqttjs_ca5c03da (p2, c1, k60, u'LinearOnly-Pon').
+1731401031: New client connected from ::ffff:172.20.0.1:62346 as mqttjs_b0c888dc (p2, c1, k60, u'LinearOnly-Pon').
+1731401100: Client mqttjs_ca5c03da closed its connection.
+1731401100: Client mqttjs_b0c888dc closed its connection.
+1731401294: mosquitto version 2.0.20 terminating
+1731401294: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731401334: mosquitto version 2.0.20 starting
+1731401334: Config loaded from /mosquitto/config/mosquitto.conf.
+1731401334: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731401334: Opening ipv4 listen socket on port 1883.
+1731401334: Opening ipv6 listen socket on port 1883.
+1731401334: Opening websockets listen socket on port 9001.
+1731401334: mosquitto version 2.0.20 running
+1731401334: New connection from 172.20.0.1:61836 on port 1883.
+1731401334: New client connected from 172.20.0.1:61836 as auto-5249F571-3F38-6E30-A705-B4941749985B (p2, c1, k60, u'LinearOnly-Idea').
+1731401335: New connection from 172.20.0.1:61842 on port 1883.
+1731401335: New client connected from 172.20.0.1:61842 as auto-0F127280-6D5A-4803-B89C-47B6E99BBD5D (p2, c1, k60, u'LinearOnly-Idea').
+1731401354: New connection from 172.20.0.1:57948 on port 1883.
+1731401354: New client connected from 172.20.0.1:57948 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731401463: Client auto-5249F571-3F38-6E30-A705-B4941749985B closed its connection.
+1731401463: Client auto-0F127280-6D5A-4803-B89C-47B6E99BBD5D closed its connection.
+1731401463: mosquitto version 2.0.20 terminating
+1731401463: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731401490: mosquitto version 2.0.20 starting
+1731401490: Config loaded from /mosquitto/config/mosquitto.conf.
+1731401490: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731401490: Opening ipv4 listen socket on port 1883.
+1731401490: Opening ipv6 listen socket on port 1883.
+1731401490: Opening websockets listen socket on port 9001.
+1731401490: mosquitto version 2.0.20 running
+1731401490: New connection from 172.20.0.1:59968 on port 1883.
+1731401490: New client connected from 172.20.0.1:59968 as auto-C17A98C7-E07F-8FD7-F4BA-382C1C5D5B63 (p2, c1, k60, u'LinearOnly-Idea').
+1731401491: New connection from 172.20.0.1:59974 on port 1883.
+1731401491: New client connected from 172.20.0.1:59974 as auto-04A5924E-F894-5FE7-7D7B-F33932114D34 (p2, c1, k60, u'LinearOnly-Idea').
+1731401510: New client connected from ::ffff:172.20.0.1:63658 as mqttjs_6bf5d2b8 (p2, c1, k60, u'LinearOnly-Pon').
+1731401510: New client connected from ::ffff:172.20.0.1:63664 as mqttjs_d2ab08b6 (p2, c1, k60, u'LinearOnly-Pon').
+1731401521: New connection from 172.20.0.1:59192 on port 1883.
+1731401521: New client connected from 172.20.0.1:59192 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731401604: Client mqttjs_6bf5d2b8 closed its connection.
+1731402016: Client mqttjs_d2ab08b6 closed its connection.
+1731402017: New client connected from ::ffff:172.20.0.1:58476 as mqttjs_439bb7bb (p2, c1, k60, u'LinearOnly-Pon').
+1731402261: Client auto-04A5924E-F894-5FE7-7D7B-F33932114D34 closed its connection.
+1731402261: Client auto-C17A98C7-E07F-8FD7-F4BA-382C1C5D5B63 closed its connection.
+1731402261: mosquitto version 2.0.20 terminating
+1731402261: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731402261: Client mqttjs_439bb7bb closed its connection.
+1731402280: mosquitto version 2.0.20 starting
+1731402280: Config loaded from /mosquitto/config/mosquitto.conf.
+1731402280: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731402280: Opening ipv4 listen socket on port 1883.
+1731402280: Opening ipv6 listen socket on port 1883.
+1731402280: Opening websockets listen socket on port 9001.
+1731402280: mosquitto version 2.0.20 running
+1731402280: New connection from 172.20.0.1:57972 on port 1883.
+1731402280: New client connected from 172.20.0.1:57972 as auto-5C0FE727-C3F6-3BAD-9630-DA3B4FD957B6 (p2, c1, k60, u'LinearOnly-Idea').
+1731402281: New connection from 172.20.0.1:57974 on port 1883.
+1731402281: New client connected from 172.20.0.1:57974 as auto-75D1AA45-DEE2-3D15-ADA5-1A4F89D4CA9F (p2, c1, k60, u'LinearOnly-Idea').
+1731402281: New client connected from ::ffff:172.20.0.1:63000 as mqttjs_439bb7bb (p2, c1, k60, u'LinearOnly-Pon').
+1731402292: Client mqttjs_439bb7bb closed its connection.
+1731402293: New client connected from ::ffff:172.20.0.1:57280 as mqttjs_a44a4f46 (p2, c1, k60, u'LinearOnly-Pon').
+1731402296: Client mqttjs_a44a4f46 closed its connection.
+1731402296: New client connected from ::ffff:172.20.0.1:57288 as mqttjs_d5f5edc0 (p2, c1, k60, u'LinearOnly-Pon').
+1731402315: Client mqttjs_d5f5edc0 closed its connection.
+1731402316: New client connected from ::ffff:172.20.0.1:61258 as mqttjs_360901f7 (p2, c1, k60, u'LinearOnly-Pon').
+1731402644: New connection from 172.20.0.1:65418 on port 1883.
+1731402644: New client connected from 172.20.0.1:65418 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731403349: Client auto-5C0FE727-C3F6-3BAD-9630-DA3B4FD957B6 closed its connection.
+1731403349: Client auto-75D1AA45-DEE2-3D15-ADA5-1A4F89D4CA9F closed its connection.
+1731403351: mosquitto version 2.0.20 terminating
+1731403351: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731403351: Client mqttjs_360901f7 closed its connection.
+1731408628: mosquitto version 2.0.20 starting
+1731408628: Config loaded from /mosquitto/config/mosquitto.conf.
+1731408628: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731408628: Opening ipv4 listen socket on port 1883.
+1731408628: Opening ipv6 listen socket on port 1883.
+1731408628: Opening websockets listen socket on port 9001.
+1731408628: mosquitto version 2.0.20 running
+1731408628: New connection from 172.20.0.1:61840 on port 1883.
+1731408628: New client connected from 172.20.0.1:61840 as auto-B29C4A39-1053-7A8E-9C0E-1720AC75D3E3 (p2, c1, k60, u'LinearOnly-Idea').
+1731408629: New connection from 172.20.0.1:61848 on port 1883.
+1731408629: New client connected from 172.20.0.1:61848 as auto-A85FEB50-85F7-FF7C-10D3-D4EEF27D14BA (p2, c1, k60, u'LinearOnly-Idea').
+1731408648: New client connected from ::ffff:172.20.0.1:62352 as mqttjs_91b714f8 (p2, c1, k60, u'LinearOnly-Pon').
+1731408648: New client connected from ::ffff:172.20.0.1:62356 as mqttjs_0c6cbd6e (p2, c1, k60, u'LinearOnly-Pon').
+1731408715: Client mqttjs_0c6cbd6e closed its connection.
+1731408715: Client mqttjs_91b714f8 closed its connection.
+1731408727: Client auto-B29C4A39-1053-7A8E-9C0E-1720AC75D3E3 closed its connection.
+1731408727: Client auto-A85FEB50-85F7-FF7C-10D3-D4EEF27D14BA closed its connection.
+1731408727: mosquitto version 2.0.20 terminating
+1731408727: Saving in-memory database to /mosquitto/data//mosquitto.db.

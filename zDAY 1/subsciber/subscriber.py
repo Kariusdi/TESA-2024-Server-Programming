@@ -1,14 +1,14 @@
 import json
 from paho.mqtt import client as mqtt_client
-import motor.motor_asyncio
 from datetime import datetime, timedelta, timezone
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://admin:1q2w3e4r@127.0.0.1:27017")
+client = MongoClient("mongodb://admin:1q2w3e4r@host.docker.internal:27017")
 db = client['machines_data']
 sensors_collection = db['sensors_collection']
 
-broker = "172.20.10.2"
+broker = "host.docker.internal"
+# broker = "172.20.10.2"
 port = 1883
 topic = "Lintech/test/msg"
 username = 'LinearOnly-Idea'

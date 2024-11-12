@@ -2,8 +2,8 @@ import json
 from paho.mqtt import client as mqtt_client
 import time
 
-# broker_hostname = "host.docker.internal"
-broker = "172.20.10.2"
+broker = "host.docker.internal"
+# broker = "172.20.10.2"
 port = 1883
 topic = "Lintech/test/msg"
 username = 'LinearOnly-Idea'
