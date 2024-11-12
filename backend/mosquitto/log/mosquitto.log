@@ -18,3 +18,176 @@ To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
 1731384090: Client mqttx_95fc35dc disconnected.
 1731384106: New connection from 172.20.0.1:64162 on port 1883.
 1731384106: New client connected from 172.20.0.1:64162 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731386804: mosquitto version 2.0.20 starting
+1731386804: Config loaded from /mosquitto/config/mosquitto.conf.
+1731386804: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731386804: Opening ipv4 listen socket on port 1883.
+1731386804: Opening ipv6 listen socket on port 1883.
+1731386804: Opening websockets listen socket on port 9001.
+1731386804: mosquitto version 2.0.20 running
+1731386805: Expiring client d9d86b9178de486da867c4d99bdba416 due to timeout.
+1731386809: New connection from 172.20.0.1:61252 on port 1883.
+1731386809: New client connected from 172.20.0.1:61252 as auto-BE845979-DAFC-A562-3A91-95DD8CEB50CE (p2, c1, k60, u'LinearOnly-Game').
+1731386811: Client auto-BE845979-DAFC-A562-3A91-95DD8CEB50CE disconnected.
+1731387293: New connection from 172.20.0.1:62812 on port 1883.
+1731387293: New client connected from 172.20.0.1:62812 as auto-E8F2DBF9-C381-C841-F03D-BC0B51668554 (p2, c1, k60, u'LinearOnly-Game').
+1731387295: Client auto-E8F2DBF9-C381-C841-F03D-BC0B51668554 disconnected.
+1731387679: New connection from 172.20.0.1:58274 on port 1883.
+1731387679: New client connected from 172.20.0.1:58274 as auto-0A81C3FD-41F8-13A8-F619-C87C8842A936 (p2, c1, k60, u'LinearOnly-Game').
+1731387689: Client auto-0A81C3FD-41F8-13A8-F619-C87C8842A936 disconnected.
+1731387698: New connection from 172.20.0.1:57524 on port 1883.
+1731387698: New client connected from 172.20.0.1:57524 as postman-mqtt-client-1731383965922 (p5, c0, k60, u'LinearOnly-Idea').
+1731387705: New connection from 172.20.0.1:64052 on port 1883.
+1731387705: New client connected from 172.20.0.1:64052 as auto-C38DF7DE-CB43-7643-7F2B-29690B55DC25 (p2, c1, k60, u'LinearOnly-Game').
+1731387715: Client auto-C38DF7DE-CB43-7643-7F2B-29690B55DC25 disconnected.
+1731387817: mosquitto version 2.0.20 terminating
+1731387817: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731392400: mosquitto version 2.0.20 starting
+1731392400: Config loaded from /mosquitto/config/mosquitto.conf.
+1731392400: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731392400: Opening ipv4 listen socket on port 1883.
+1731392400: Opening ipv6 listen socket on port 1883.
+1731392400: Opening websockets listen socket on port 9001.
+1731392400: mosquitto version 2.0.20 running
+1731392401: Expiring client postman-mqtt-client-1731383965922 due to timeout.
+1731392407: mosquitto version 2.0.20 terminating
+1731392407: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731392686: mosquitto version 2.0.20 starting
+1731392686: Config loaded from /mosquitto/config/mosquitto.conf.
+1731392686: Warning: File /mosquitto/config/mosquitto.passwd has world readable permissions. Future versions will refuse to load this file.
+To fix this, use `chmod 0700 /mosquitto/config/mosquitto.passwd`.
+1731392686: Opening ipv4 listen socket on port 1883.
+1731392686: Opening ipv6 listen socket on port 1883.
+1731392686: Opening websockets listen socket on port 9001.
+1731392686: mosquitto version 2.0.20 running
+1731392692: New connection from 172.20.0.1:63444 on port 1883.
+1731392692: New client connected from 172.20.0.1:63444 as auto-D323FE22-ABEE-2059-862F-CCE43D0B427E (p2, c1, k60, u'LinearOnly-Karn').
+1731392702: Client auto-D323FE22-ABEE-2059-862F-CCE43D0B427E disconnected.
+1731392711: New connection from 172.20.0.1:57034 on port 1883.
+1731392711: New client connected from 172.20.0.1:57034 as auto-69B9D907-7BD1-E9FF-EBF8-D9038A9E482F (p2, c1, k60, u'LinearOnly-Karn').
+1731392718: Client auto-69B9D907-7BD1-E9FF-EBF8-D9038A9E482F disconnected.
+1731392797: New connection from 172.20.0.1:59186 on port 1883.
+1731392797: New client connected from 172.20.0.1:59186 as auto-DC884028-D8E5-A941-C092-A63AEB3FFE2E (p2, c1, k60, u'LinearOnly-Karn').
+1731392868: Client auto-DC884028-D8E5-A941-C092-A63AEB3FFE2E disconnected.
+1731392875: New connection from 172.20.0.1:58668 on port 1883.
+1731392875: New client connected from 172.20.0.1:58668 as auto-9BADC8B8-F36F-99BD-A2F9-9B2C799C99F3 (p2, c1, k60, u'LinearOnly-Karn').
+1731392914: New connection from 172.20.0.1:59740 on port 1883.
+1731392915: New client connected from 172.20.0.1:59740 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731392952: Client auto-9BADC8B8-F36F-99BD-A2F9-9B2C799C99F3 closed its connection.
+1731393019: New connection from 172.20.0.1:63860 on port 1883.
+1731393019: New client connected from 172.20.0.1:63860 as auto-EB4384C9-6088-358E-696C-580B204949B2 (p2, c1, k60, u'LinearOnly-Karn').
+1731393026: Client auto-EB4384C9-6088-358E-696C-580B204949B2 disconnected.
+1731393052: New connection from 172.20.0.1:57130 on port 1883.
+1731393052: New client connected from 172.20.0.1:57130 as auto-F27792E5-87AE-1B52-89E4-0D4DB92EB106 (p2, c1, k60, u'LinearOnly-Karn').
+1731393085: Client auto-F27792E5-87AE-1B52-89E4-0D4DB92EB106 closed its connection.
+1731393103: New connection from 172.20.0.1:58076 on port 1883.
+1731393103: New client connected from 172.20.0.1:58076 as auto-6950138E-2E5A-C71C-DADE-0C697E7DF80F (p2, c1, k60, u'LinearOnly-Karn').
+1731393130: Client auto-6950138E-2E5A-C71C-DADE-0C697E7DF80F closed its connection.
+1731393518: New connection from 172.20.0.1:60792 on port 1883.
+1731393518: New client connected from 172.20.0.1:60792 as auto-E6C0A213-5814-1528-3878-00BAD4E72A55 (p2, c1, k60, u'LinearOnly-Idea').
+1731393529: Client auto-E6C0A213-5814-1528-3878-00BAD4E72A55 disconnected.
+1731393669: New connection from 172.20.0.1:58604 on port 1883.
+1731393669: New client connected from 172.20.0.1:58604 as auto-DD443FD2-8FB7-9640-0FDE-36E049C922FB (p2, c1, k60, u'LinearOnly-Idea').
+1731393675: New connection from 172.20.0.1:55170 on port 1883.
+1731393675: New client connected from 172.20.0.1:55170 as auto-A2CD6231-8618-737B-E02A-551BF6F27D55 (p2, c1, k60, u'LinearOnly-Idea').
+1731393688: Client auto-A2CD6231-8618-737B-E02A-551BF6F27D55 disconnected.
+1731393690: Client auto-DD443FD2-8FB7-9640-0FDE-36E049C922FB closed its connection.
+1731393736: New connection from 172.20.0.1:65410 on port 1883.
+1731393736: New client connected from 172.20.0.1:65410 as auto-75A18D72-E8B9-29A9-D39D-9C448875EDC9 (p2, c1, k60, u'LinearOnly-Idea').
+1731393739: New connection from 172.20.0.1:65412 on port 1883.
+1731393739: New client connected from 172.20.0.1:65412 as auto-38C3BF8E-0BCD-374E-9CD4-A82B8B16D9F6 (p2, c1, k60, u'LinearOnly-Idea').
+1731393739: Client auto-38C3BF8E-0BCD-374E-9CD4-A82B8B16D9F6 disconnected.
+1731393751: New connection from 172.20.0.1:57552 on port 1883.
+1731393751: New client connected from 172.20.0.1:57552 as auto-8174E3EE-C554-0065-6C35-24B198E22FC4 (p2, c1, k60, u'LinearOnly-Idea').
+1731393755: Client auto-8174E3EE-C554-0065-6C35-24B198E22FC4 closed its connection.
+1731394487: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731394676: Client auto-75A18D72-E8B9-29A9-D39D-9C448875EDC9 closed its connection.
+1731394824: New connection from 172.20.0.1:62228 on port 1883.
+1731394824: New client connected from 172.20.0.1:62228 as ddc7957df62e4ac3ba768cb367d1968d (p5, c1, k60, u'LinearOnly-Karn').
+1731395087: Client ddc7957df62e4ac3ba768cb367d1968d disconnected.
+1731395087: New connection from 172.20.0.1:63334 on port 1883.
+1731395087: New client connected from 172.20.0.1:63334 as 031187588d0a4bc09dd97c76ab57cefb (p5, c1, k60, u'LinearOnly-Karn').
+1731395098: Client 031187588d0a4bc09dd97c76ab57cefb disconnected.
+1731395099: New connection from 172.20.0.1:61512 on port 1883.
+1731395099: New client connected from 172.20.0.1:61512 as f847ac9ba1364ba9bccc9137cedcc3e2 (p5, c1, k60, u'LinearOnly-Karn').
+1731395151: Client f847ac9ba1364ba9bccc9137cedcc3e2 disconnected.
+1731396257: Client mqttx_95fc35dc disconnected.
+1731396288: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731396539: New connection from 172.20.0.1:58778 on port 1883.
+1731396539: New client connected from 172.20.0.1:58778 as mqttx_95fc35dc (p2, c1, k60, u'LinearOnly-Karn').
+1731396567: New client connected from ::ffff:172.20.0.1:64656 as mqttjs_0adf1844 (p2, c1, k60, u'LinearOnly-Pon').
+1731396902: Client mqttjs_0adf1844 disconnected.
+1731396902: New client connected from ::ffff:172.20.0.1:59764 as mqttjs_4e597f6e (p2, c1, k60, u'LinearOnly-Pon').
+1731397032: New connection from 172.20.0.1:63452 on port 1883.
+1731397032: New client connected from 172.20.0.1:63452 as auto-4F015B6A-4484-A98A-3C44-6013A3FE35AF (p2, c1, k60, u'LinearOnly-Idea').
+1731397042: Client auto-4F015B6A-4484-A98A-3C44-6013A3FE35AF disconnected.
+1731397133: New connection from 172.20.0.1:62710 on port 1883.
+1731397133: New client connected from 172.20.0.1:62710 as auto-032A60D2-D0F3-8F19-8BD6-AC55A0EF652A (p2, c1, k60, u'LinearOnly-Idea').
+1731397152: Client mqttjs_4e597f6e closed its connection.
+1731397153: New client connected from ::ffff:172.20.0.1:65222 as mqttjs_9c65e224 (p2, c1, k60, u'LinearOnly-Pon').
+1731397331: Client mqttjs_9c65e224 disconnected.
+1731397397: New client connected from ::ffff:172.20.0.1:59488 as mqttjs_bedc1e35 (p2, c1, k60, u'LinearOnly-Pon').
+1731397414: Client mqttjs_bedc1e35 closed its connection.
+1731397415: New client connected from ::ffff:172.20.0.1:58100 as mqttjs_83ebf9dc (p2, c1, k60, u'LinearOnly-Pon').
+1731397419: Client auto-032A60D2-D0F3-8F19-8BD6-AC55A0EF652A disconnected.
+1731397429: New connection from 172.20.0.1:56774 on port 1883.
+1731397429: New client connected from 172.20.0.1:56774 as auto-90E39C70-ECA3-1E55-E1B8-6C767F343F2A (p2, c1, k60, u'LinearOnly-Idea').
+1731397457: Client auto-90E39C70-ECA3-1E55-E1B8-6C767F343F2A disconnected.
+1731397461: Client mqttjs_83ebf9dc closed its connection.
+1731397462: New client connected from ::ffff:172.20.0.1:62394 as mqttjs_d213f049 (p2, c1, k60, u'LinearOnly-Pon').
+1731397483: New connection from 172.20.0.1:63296 on port 1883.
+1731397483: New client connected from 172.20.0.1:63296 as auto-429FA297-E095-22D8-0707-7D29DC65BB0F (p2, c1, k60, u'LinearOnly-Idea').
+1731397516: Client mqttjs_d213f049 closed its connection.
+1731397516: New client connected from ::ffff:172.20.0.1:65474 as mqttjs_2568ac29 (p2, c1, k60, u'LinearOnly-Pon').
+1731397571: Client auto-429FA297-E095-22D8-0707-7D29DC65BB0F disconnected.
+1731397596: Client mqttjs_2568ac29 disconnected.
+1731397647: New client connected from ::ffff:172.20.0.1:55614 as mqttjs_19ea09b3 (p2, c1, k60, u'LinearOnly-Pon').
+1731397697: New connection from 172.20.0.1:58770 on port 1883.
+1731397697: New client connected from 172.20.0.1:58770 as auto-511C7E36-40F7-25A5-A4F8-BCF96C4E2658 (p2, c1, k60, u'LinearOnly-Idea').
+1731397757: Client mqttjs_19ea09b3 closed its connection.
+1731397757: New client connected from ::ffff:172.20.0.1:57794 as mqttjs_861f1003 (p2, c1, k60, u'LinearOnly-Pon').
+1731397790: Client mqttjs_861f1003 closed its connection.
+1731397790: New client connected from ::ffff:172.20.0.1:55316 as mqttjs_25267dd0 (p2, c1, k60, u'LinearOnly-Pon').
+1731397823: Client mqttjs_25267dd0 closed its connection.
+1731397824: New client connected from ::ffff:172.20.0.1:57724 as mqttjs_7c7bc38b (p2, c1, k60, u'LinearOnly-Pon').
+1731397884: Client mqttjs_7c7bc38b closed its connection.
+1731397885: New client connected from ::ffff:172.20.0.1:63556 as mqttjs_ca487489 (p2, c1, k60, u'LinearOnly-Pon').
+1731397983: Client mqttjs_ca487489 disconnected.
+1731397983: New client connected from ::ffff:172.20.0.1:55496 as mqttjs_fca1c86d (p2, c1, k60, u'LinearOnly-Pon').
+1731397984: Client mqttjs_fca1c86d closed its connection.
+1731397985: New client connected from ::ffff:172.20.0.1:55504 as mqttjs_b5e90dd6 (p2, c1, k60, u'LinearOnly-Pon').
+1731398043: Client mqttjs_b5e90dd6 disconnected.
+1731398043: New client connected from ::ffff:172.20.0.1:57320 as mqttjs_849d22a6 (p2, c1, k60, u'LinearOnly-Pon').
+1731398046: Client mqttjs_849d22a6 closed its connection.
+1731398046: New client connected from ::ffff:172.20.0.1:57332 as mqttjs_2a8f1a54 (p2, c1, k60, u'LinearOnly-Pon').
+1731398074: Client mqttjs_2a8f1a54 closed its connection.
+1731398074: New client connected from ::ffff:172.20.0.1:58986 as mqttjs_420036ee (p2, c1, k60, u'LinearOnly-Pon').
+1731398089: Saving in-memory database to /mosquitto/data//mosquitto.db.
+1731398242: Client mqttjs_420036ee disconnected.
+1731398242: New client connected from ::ffff:172.20.0.1:56502 as mqttjs_60d792d0 (p2, c1, k60, u'LinearOnly-Pon').
+1731398245: Client mqttjs_60d792d0 closed its connection.
+1731398245: New client connected from ::ffff:172.20.0.1:56516 as mqttjs_019e9d02 (p2, c1, k60, u'LinearOnly-Pon').
+1731398263: Client mqttjs_019e9d02 disconnected.
+1731398263: New client connected from ::ffff:172.20.0.1:64858 as mqttjs_8260cb1e (p2, c1, k60, u'LinearOnly-Pon').
+1731398263: Client mqttjs_8260cb1e closed its connection.
+1731398264: New client connected from ::ffff:172.20.0.1:64864 as mqttjs_8a0229d7 (p2, c1, k60, u'LinearOnly-Pon').
+1731398302: Client mqttjs_8a0229d7 closed its connection.
+1731398302: New client connected from ::ffff:172.20.0.1:63960 as mqttjs_322e1dcc (p2, c1, k60, u'LinearOnly-Pon').
+1731398351: Client auto-511C7E36-40F7-25A5-A4F8-BCF96C4E2658 disconnected.
+1731398356: Client mqttjs_322e1dcc closed its connection.
+1731398356: New client connected from ::ffff:172.20.0.1:61414 as mqttjs_fd6455b6 (p2, c1, k60, u'LinearOnly-Pon').
+1731398409: Client mqttjs_fd6455b6 closed its connection.
+1731398410: New client connected from ::ffff:172.20.0.1:61030 as mqttjs_458579f1 (p2, c1, k60, u'LinearOnly-Pon').
+1731398420: New connection from 172.20.0.1:60024 on port 1883.
+1731398420: New client connected from 172.20.0.1:60024 as auto-1CC40B35-ED31-69EC-4587-EEA0B8D96DE4 (p2, c1, k60, u'LinearOnly-Idea').
+1731398497: Client mqttjs_458579f1 closed its connection.
+1731398498: New client connected from ::ffff:172.20.0.1:59740 as mqttjs_0a44cac8 (p2, c1, k60, u'LinearOnly-Pon').
+1731398658: Client mqttjs_0a44cac8 disconnected.
+1731398658: New client connected from ::ffff:172.20.0.1:58874 as mqttjs_3596c141 (p2, c1, k60, u'LinearOnly-Pon').
+1731398660: Client mqttjs_3596c141 closed its connection.
+1731398660: New client connected from ::ffff:172.20.0.1:58890 as mqttjs_6055f401 (p2, c1, k60, u'LinearOnly-Pon').
+1731398699: Client mqttjs_6055f401 closed its connection.
+1731398700: New client connected from ::ffff:172.20.0.1:65236 as mqttjs_b7c8b1a6 (p2, c1, k60, u'LinearOnly-Pon').
+1731398706: Client auto-1CC40B35-ED31-69EC-4587-EEA0B8D96DE4 disconnected.

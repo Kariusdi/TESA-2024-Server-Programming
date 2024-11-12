@@ -2,7 +2,7 @@ import motor.motor_asyncio
 from bson.objectid import ObjectId
 from pymongo import ReturnDocument
 
-MONGO_DETAILS = "mongodb://admin:1q2w3e4r@mongodb:27017"
+MONGO_DETAILS = "mongodb://admin:1q2w3e4r@127.0.0.1:27017"
 
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 
@@ -14,12 +14,9 @@ status_collection = database.get_collection("status_collection")
 def sensor_helper(sensor) -> dict:
     return {
         "id": str(sensor["_id"]),
-        "name": sensor["name"],
-        "timestamp": sensor["timestamp"],
-        "hour": sensor["hour"],
-        "minute": sensor["minute"],
-        "date": sensor["date"],
-        "sensorValue": sensor["sensorValue"]
+        "machine_id": sensor["machine_id"],
+        "sensorVal": sensor["sensorVal"],
+        "date": sensor["date"]
     }
     
 def status_helper(status) -> dict:

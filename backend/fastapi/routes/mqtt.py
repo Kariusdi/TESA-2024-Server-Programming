@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from fastapi_mqtt.config import MQTTConfig
 from fastapi_mqtt.fastmqtt import FastMQTT
 from utils.time import getTimeStamp
-from models.sensor import SensorDataSchema
+from models.mqttMSG import SensorValueSchema
 from db.crud import create
 import socketio
 
@@ -12,7 +12,7 @@ import socketio
 sio_server = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins=[])
 sio_app = socketio.ASGIApp(socketio_server=sio_server, socketio_path='sockets')
 
-mqtt_config = MQTTConfig(host = "mosquitto",
+mqtt_config = MQTTConfig(host = "localhost",
     port= 1883,
     keepalive = 60,
     username="LinearOnly-Karn",
@@ -60,6 +60,22 @@ async def machine_status(client, topic, payload, qos, properties):
     await sio_server.emit('machine_status', data["data"])
     
     print("Done")
+    
+@fast_mqtt.subscribe("Lintech/test/db/write")
+async def mqtt_write_db(client, topic, payload, qos, properties):
+    data = json.loads(payload)
+    
+    date = getTimeStamp()
+    
+    data_schema: SensorValueSchema = {
+        "machine_id": data["machine_id"],
+        "sensorVal": data["sensorVal"],
+        "date": date
+    }
+    
+    await create(data_schema)
+    print("Done")
+    print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
     
 @fast_mqtt.on_disconnect()
 def disconnect(client, packet, exc=None):
