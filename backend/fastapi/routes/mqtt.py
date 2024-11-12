@@ -33,25 +33,25 @@ async def message(client, topic, payload, qos, properties):
     print("Received message: ",topic, payload.decode(), qos, properties)
 
 # @fast_mqtt.subscribe("my/mqtt/topic/#")
-@fast_mqtt.subscribe("linearOnly/soundSensor/1")
-async def message_to_topic(client, topic, payload, qos, properties):
-    data = json.loads(payload)
+# @fast_mqtt.subscribe("linearOnly/soundSensor/1")
+# async def message_to_topic(client, topic, payload, qos, properties):
+#     data = json.loads(payload)
 
-    time = getTimeStamp()
+#     time = getTimeStamp()
     
-    data_schema = {
-        "name": data["name"],
-        "timestamp": time["timestamp"],
-        "hour": time["hour"],
-        "minute": time["minute"],
-        "date": time["date"],
-        "sensorValue": data["sensorValue"],
-    }
+#     data_schema = {
+#         "name": data["name"],
+#         "timestamp": time["timestamp"],
+#         "hour": time["hour"],
+#         "minute": time["minute"],
+#         "date": time["date"],
+#         "sensorValue": data["sensorValue"],
+#     }
     
-    sensor_data: SensorDataSchema = data_schema
-    await create(sensor_data)
+#     sensor_data: SensorDataSchema = data_schema
+#     await create(sensor_data)
     
-    print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
+#     print("Received message to specific topic: ", topic, payload.decode(), qos, properties)
 
 @fast_mqtt.subscribe("linearOnly/status")
 async def machine_status(client, topic, payload, qos, properties):

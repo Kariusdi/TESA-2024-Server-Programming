@@ -5,7 +5,7 @@ import time
 # broker_hostname = "host.docker.internal"
 broker = "172.20.10.2"
 port = 1883
-topic = "test"
+topic = "Lintech/test/msg"
 username = 'LinearOnly-Idea'
 password = '1q2w3e4r'
 
@@ -25,7 +25,7 @@ def connect_mqtt() -> mqtt_client:
 def publish(client: mqtt_client):
     try:
         while True:
-            time.sleep(2)
+            time.sleep(10)
             payload = {
                 "machine_id": 1,
                 "sensorVal": 476
