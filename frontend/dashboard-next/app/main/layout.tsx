@@ -9,11 +9,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
       <main className="flex relative">
-        <div className="fixed">
+        {/* <div className="fixed">
           <AppMenu />
-        </div>
+        </div> */}
         <div className="flex flex-grow justify-center items-start">
-          <div className="h-screen w-[220px] flex-shrink" />
+          {/* <div className="h-screen w-[220px] flex-shrink" /> */}
           {children}
         </div>
       </main>

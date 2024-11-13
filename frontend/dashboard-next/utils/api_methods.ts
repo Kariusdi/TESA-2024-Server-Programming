@@ -1,4 +1,5 @@
 import { SensorData, StatusData, StatusDataNoId } from "@/types/types";
+import { io } from "socket.io-client";
 
 export const sensor_fetcher = (url: string): Promise<SensorData[]> =>
   fetch(url)
@@ -58,3 +59,14 @@ export const status_deleter = async (): Promise<boolean[]> =>
       console.log("Error!", err);
       throw err;
     });
+
+export function createSocketConnection() {
+  const apiKey = "e57972d26910e9d9e4caf68fd941c775";
+
+  const socket = io("ws://technest.ddns.net:8001/ws", {
+    transports: ["websocket"],
+    query: { api_key: apiKey },
+  });
+
+  return socket;
+}
