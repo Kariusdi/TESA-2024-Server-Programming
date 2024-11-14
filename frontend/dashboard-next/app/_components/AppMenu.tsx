@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 const menuList = [
   { title: "Dashboard", icon: Dashboard, path: "/main/dashboard" },
-  { title: "Maintenances", icon: Trello, path: "/main/maintenancelogs" },
+  { title: "Maintenance Alerts", icon: Trello, path: "/main/maintenancelogs" },
   { title: "Machine Info Logs", icon: Logs, path: "/main/machinelogs" },
   { title: "Audio logs", icon: Logs, path: "/main/audiologs" },
 ];

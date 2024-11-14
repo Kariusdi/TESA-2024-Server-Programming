@@ -92,6 +92,7 @@ const AudioLogs = () => {
       <div className="flex justify-between items-center w-full mb-5">
         <AppHeader title={"Audio Logs"} />
       </div>
+      {audioSets.length === 0 && <p className="mt-10">No data found.</p>}
       {audioSets?.map((ele, idx) => (
         <div
           key={idx}

@@ -142,6 +142,30 @@ const AppDashboard: FC = () => {
         const raw_data: MachineInfo = JSON.parse(event.data);
         if (raw_data) {
           console.log(raw_data);
+
+          const fetcher = async (body: any) => {
+            await fetch("http://127.0.0.1:80/info/create/", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(body),
+            })
+              .then((res) => res.json())
+              .then((data) => data.data[0])
+              .catch((err) => {
+                console.log("Error!", err);
+                throw err;
+              });
+          };
+
+          const payload = {
+            ...raw_data,
+            timeStamp: dayjs().format("YYYY-MM-DD HH:mm"),
+          };
+
+          fetcher(payload);
+
           setTime((prev) => {
             if (prev.length >= 200) return [];
             return [...prev, dayjs().format("HH:mm:ss")];
@@ -204,14 +228,6 @@ const AppDashboard: FC = () => {
         },
       },
     },
-    pan: {
-      enabled: true,
-      mode: "xy",
-    },
-    zoom: {
-      enabled: true,
-      mode: "x",
-    },
   };
 
   const voltageOptions = {
@@ -229,14 +245,6 @@ const AppDashboard: FC = () => {
         },
       },
     },
-    pan: {
-      enabled: true,
-      mode: "xy",
-    },
-    zoom: {
-      enabled: true,
-      mode: "x",
-    },
   };
   const pressureOptions = {
     scales: {
@@ -252,14 +260,6 @@ const AppDashboard: FC = () => {
           text: "Pressure", // Optionally, set y-axis label as well
         },
       },
-    },
-    pan: {
-      enabled: true,
-      mode: "xy",
-    },
-    zoom: {
-      enabled: true,
-      mode: "x",
     },
   };
   const forceOptions = {
@@ -277,13 +277,13 @@ const AppDashboard: FC = () => {
         },
       },
     },
-    pan: {
-      enabled: true,
-      mode: "xy",
-    },
-    zoom: {
-      enabled: true,
-      mode: "x",
+    plugins: {
+      zoom: {
+        limits: {
+          y: { min: 0, max: 100 },
+          y2: { min: -5, max: 5 },
+        },
+      },
     },
   };
   const positionPunchOptions = {
@@ -300,14 +300,6 @@ const AppDashboard: FC = () => {
           text: "Position of Punch", // Optionally, set y-axis label as well
         },
       },
-    },
-    pan: {
-      enabled: true,
-      mode: "xy",
-    },
-    zoom: {
-      enabled: true,
-      mode: "x",
     },
   };
   const volData = useMemo(() => {
@@ -331,7 +323,7 @@ const AppDashboard: FC = () => {
         },
       ],
     };
-  }, [time, energyConsumption]);
+  }, [time, volOne, volTwo, volThree]);
   const powerData = useMemo(() => {
     return {
       labels: time,
@@ -392,38 +384,38 @@ const AppDashboard: FC = () => {
 
   const [soundData, setSoundData] = useState<SoundData[]>([]);
   const [sampling, setSampling] = useState<number[]>([]);
-  useEffect(() => {
-    const fetcher = async () => {
-      try {
-        await fetch("http://127.0.0.1:80/audio/get_all", {
-          method: "GET",
-        })
-          .then(async (res) => {
-            if (res.status === 403) {
-              console.log("Token expired. Redirecting to /");
-            } else {
-              return await res.json();
-            }
-          })
-          .then((data) => {
-            console.log(data.data[0]);
-            setSoundData(data.data[0]);
-            // setSampling(data.data[0][0].dataList);
-          })
-          .catch((err) => console.log("Error! This Collection is Empty", err));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetcher();
-  }, []);
+  // useEffect(() => {
+  //   const fetcher = async () => {
+  //     try {
+  //       await fetch("http://127.0.0.1:80/audio/get_all", {
+  //         method: "GET",
+  //       })
+  //         .then(async (res) => {
+  //           if (res.status === 403) {
+  //             console.log("Token expired. Redirecting to /");
+  //           } else {
+  //             return await res.json();
+  //           }
+  //         })
+  //         .then((data) => {
+  //           console.log(data.data[0]);
+  //           setSoundData(data.data[0]);
+  //           // setSampling(data.data[0][0].dataList);
+  //         })
+  //         .catch((err) => console.log("Error! This Collection is Empty", err));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetcher();
+  // }, []);
 
-  useEffect(() => {
-    if (soundData[0]) {
-      setSampling(soundData[0]?.dataList);
-      console.log(soundData[0]?.dataList);
-    }
-  }, [soundData]);
+  // useEffect(() => {
+  //   if (soundData[0]) {
+  //     setSampling(soundData[0]?.dataList);
+  //     console.log(soundData[0]?.dataList);
+  //   }
+  // }, [soundData]);
 
   const samplingData = useMemo(() => {
     return {
@@ -439,6 +431,12 @@ const AppDashboard: FC = () => {
       ],
     };
   }, [sampling]); // Changed dependencies to only `sampling`
+
+  const [zoomForce, setZoomForce] = useState<boolean>(false);
+  const [zoomPower, setZoomPower] = useState<boolean>(false);
+  const [zoomVol, setZoomVol] = useState<boolean>(false);
+  const [zoomPressure, setZoomPressure] = useState<boolean>(false);
+  const [zoomPositionPunch, setZoomPositionPunch] = useState<boolean>(false);
 
   if (loader) {
     return (
@@ -486,13 +484,22 @@ const AppDashboard: FC = () => {
           <div className="w-full h-50">
             <AppSubHeader title="Machine Power and Pressure" />
             <div className="flex justify-start items-center mt-2">
-              <div className="w-[450px] h-auto bg-white rounded-lg p-2 mr-5">
+              <div
+                className="w-[450px] h-auto bg-white rounded-lg p-2 mr-5"
+                onClick={() => setZoomPower(true)}
+              >
                 <AppLineChart options={powerOptions} data={powerData} />
               </div>
-              <div className="w-[450px] h-auto bg-white rounded-lg p-2 mr-5">
+              <div
+                className="w-[450px] h-auto bg-white rounded-lg p-2 mr-5"
+                onClick={() => setZoomVol(true)}
+              >
                 <AppLineChart options={voltageOptions} data={volData} />
               </div>
-              <div className="w-[450px] h-auto bg-white rounded-lg shadow-lg p-2">
+              <div
+                className="w-[450px] h-auto bg-white rounded-lg shadow-lg p-2"
+                onClick={() => setZoomPressure(true)}
+              >
                 <AppLineChart options={pressureOptions} data={pressureData} />
               </div>
             </div>
@@ -500,10 +507,16 @@ const AppDashboard: FC = () => {
           <div className="flex justify-between items-start w-full mt-5">
             <div className="flex flex-col justify-center items-center mt-5 space-y-2">
               <AppSubHeader title="Force and Position of Punch" />
-              <div className="w-[500px] h-auto bg-white rounded-lg p-2">
+              <div
+                className="w-[500px] h-auto bg-white rounded-lg p-2"
+                onClick={() => setZoomForce(true)}
+              >
                 <AppLineChart options={forceOptions} data={forceData} />
               </div>
-              <div className="w-[500px] h-auto bg-white rounded-lg p-2">
+              <div
+                className="w-[500px] h-auto bg-white rounded-lg p-2"
+                onClick={() => setZoomPositionPunch(true)}
+              >
                 <AppLineChart
                   options={positionPunchOptions}
                   data={positionPunchData}
@@ -530,6 +543,61 @@ const AppDashboard: FC = () => {
             <AppSummary handleStart={handleStart} handleStop={handleStop} />
           </div>
         </div>
+
+        {/* Modals */}
+        {(zoomForce ||
+          zoomPower ||
+          zoomPositionPunch ||
+          zoomPressure ||
+          zoomVol) && (
+          <div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            onClick={() => {
+              setZoomForce(false);
+              setZoomPower(false);
+              setZoomPositionPunch(false);
+              setZoomPressure(false);
+              setZoomVol(false);
+            }} // Close all zoom modals on overlay click
+          >
+            <div
+              className="bg-white rounded-lg p-4 w-[1200px] h-[700px]"
+              onClick={(e) => e.stopPropagation()} // Prevent closing on modal content click
+            >
+              <button
+                className="mb-4 text-red-500 font-bold"
+                onClick={() => {
+                  setZoomForce(false);
+                  setZoomPower(false);
+                  setZoomPositionPunch(false);
+                  setZoomPressure(false);
+                  setZoomVol(false);
+                }} // Close all zoom modals on button click
+              >
+                X
+              </button>
+
+              {zoomForce && (
+                <AppLineChart options={forceOptions} data={forceData} />
+              )}
+              {zoomPower && (
+                <AppLineChart options={powerOptions} data={powerData} />
+              )}
+              {zoomPositionPunch && (
+                <AppLineChart
+                  options={positionPunchOptions}
+                  data={positionPunchData}
+                />
+              )}
+              {zoomPressure && (
+                <AppLineChart options={pressureOptions} data={pressureData} />
+              )}
+              {zoomVol && (
+                <AppLineChart options={voltageOptions} data={volData} />
+              )}
+            </div>
+          </div>
+        )}
       </>
     );
   }

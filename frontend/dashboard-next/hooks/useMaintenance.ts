@@ -62,9 +62,9 @@ export const useMaintenance = () => {
       console.log("Connected to MQTT broker via WebSocket");
       setClient(mqttClient); // Store the client for later use
 
-      mqttClient.subscribe("lintech/machines/status", (err) => {
+      mqttClient.subscribe("lintech/machine/status", (err) => {
         if (!err) {
-          console.log(`Subscribed to topic: lintech/machines/status`);
+          console.log(`Subscribed to topic: lintech/machine/status`);
         }
       });
 

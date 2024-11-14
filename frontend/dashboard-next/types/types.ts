@@ -61,3 +61,25 @@ export interface MachineInfo {
 interface CycleCount {
   CycleCount: number;
 }
+
+interface MachinesVol {
+  L1_GND: number;
+  L2_GND: number;
+  L3_GND: number;
+}
+
+export interface MachineInfoTime {
+  ["Cycle Count"]: number;
+  ["Energy Consumption"]: {
+    Power: number;
+  };
+  Force: number;
+  ["Position of the Punch"]: number;
+  Pressure: number;
+  Voltage: MachinesVol;
+  timeStamp: string;
+}
+
+interface CycleCount {
+  CycleCount: number;
+}

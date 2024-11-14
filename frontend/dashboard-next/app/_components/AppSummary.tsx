@@ -126,10 +126,7 @@ const AppSummary: FC<AppSummaryProps> = ({ handleStart, handleStop }) => {
               </div>
             )}
           </div>
-          <MqttButton
-            brokerUrl={"ws://localhost:9001"}
-            topic={"prediction/1"}
-          />
+          <MqttButton brokerUrl={"ws://localhost:9001"} topic={"terminate/1"} />
         </div>
       </div>
     </section>

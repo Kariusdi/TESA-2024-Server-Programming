@@ -85,7 +85,7 @@ const MqttButton: React.FC<MqttButtonProps> = ({ brokerUrl, topic }) => {
         onClick={handleButtonClick}
         className="py-2 px-5 cursor-pointer bg-[#F85F3F] hover:bg-[#34150F] text-white font-bold rounded-full mt-3 mb-5 w-[125px] h-[125px] flex justify-center items-center shadow-lg active:bg-black active:shadow-inner"
       >
-        Prediction
+        Terminate
       </button>
     </div>
   );
