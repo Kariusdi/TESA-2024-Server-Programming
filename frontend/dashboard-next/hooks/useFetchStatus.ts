@@ -4,13 +4,13 @@ import useSWR from "swr";
 
 export const useFetchStatus = () => {
   const { data, error, isLoading, isValidating } = useSWR<StatusData[]>(
-    "http://127.0.0.1:80/sensor/retrieve/maintenance/logs",
+    "http://127.0.0.1:80/status/retrieve/maintenance/logs",
     status_fetcher,
     {
       revalidateOnFocus: true,
       revalidateIfStale: true,
       revalidateOnMount: true,
-      dedupingInterval: 1000,
+      // dedupingInterval: 1000,
     }
   );
 

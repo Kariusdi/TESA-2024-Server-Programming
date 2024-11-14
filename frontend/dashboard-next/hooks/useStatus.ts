@@ -43,6 +43,7 @@ export const useStatus = () => {
         };
         setMachineStatus([data]);
         setTimer(dayjs().format("DD/MM/YYYY HH:mm:ss"));
+        setTrigger(true);
         localStorage.setItem("timer", dayjs().format("DD/MM/YYYY HH:mm:ss"));
         localStorage.setItem("latestStatus", JSON.stringify([data]));
       } catch (error) {

@@ -13,7 +13,7 @@ export const status_fetcher = async (url: string): Promise<StatusData[]> =>
     .catch((err) => console.log("Error! This Collection is Empty", err));
 
 export const status_poster = async (body: object): Promise<StatusDataNoId[]> =>
-  await fetch("http://127.0.0.1:80/sensor/create/maintenance/logs", {
+  await fetch("http://127.0.0.1:80/status/create/maintenance/logs", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export const status_updater = async (
   _id: string,
   body: object
 ): Promise<StatusDataNoId> =>
-  await fetch(`http://127.0.0.1:80/sensor/update/maintenance/logs/${_id}`, {
+  await fetch(`http://127.0.0.1:80/status/update/maintenance/logs/${_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export const status_updater = async (
     });
 
 export const status_deleter = async (): Promise<boolean[]> =>
-  await fetch("http://127.0.0.1:80/sensor/delete/maintenance/logs", {
+  await fetch("http://127.0.0.1:80/status/delete/maintenance/logs", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

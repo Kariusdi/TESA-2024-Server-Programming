@@ -107,38 +107,35 @@ export const useMaintenance = () => {
 
   useEffect(() => {
     // Find any new maintenance records with status -1 that aren't already in maintenaceDataSet
-    const newMaintenances = machineStatus.filter(
-      (ele) =>
-        ele.status === -1 &&
-        !maintenaceDataSet.some((item) => item.id === ele.id)
-    );
-
-    if (newMaintenances.length > 0) {
-      // Update the maintenance dataset with new entries
-      const updatedDataSet = [
-        ...maintenaceDataSet,
-        ...newMaintenances.map((item) => ({
-          ...item,
-          date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
-        })),
-      ];
-
-      setMaintenaceDataSet(updatedDataSet);
-
-      if (trigger) {
-        const postData = async () => {
-          await status_poster(updatedDataSet);
-        };
-        postData();
-        console.log("Done Post Maintenance Data");
-
-        // Open modal when new data with status -1 comes in
-        setModalOpen(true);
-      }
-    } else {
-      // Close the modal if there’s no new data with status -1
-      setModalOpen(false);
-    }
+    // const newMaintenances = machineStatus.filter(
+    //   (ele) =>
+    //     ele.status === -1 &&
+    //     !maintenaceDataSet.some((item) => item.id === ele.id)
+    // );
+    // console.log(newMaintenances);
+    // if (newMaintenances.length > 0) {
+    //   // Update the maintenance dataset with new entries
+    //   const updatedDataSet = [
+    //     ...maintenaceDataSet,
+    //     ...newMaintenances.map((item) => ({
+    //       ...item,
+    //       date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
+    //     })),
+    //   ];
+    //   setMaintenaceDataSet(updatedDataSet);
+    //   if (trigger) {
+    //     const postData = async () => {
+    //       await status_poster(updatedDataSet);
+    //     };
+    //     postData();
+    //     console.log("Done Post Maintenance Data");
+    //     // Open modal when new data with status -1 comes in
+    //     setModalOpen(true);
+    //   }
+    // } else {
+    //   // Close the modal if there’s no new data with status -1
+    //   setModalOpen(false);
+    // }
   }, [machineStatus, trigger]);
 
   return {
