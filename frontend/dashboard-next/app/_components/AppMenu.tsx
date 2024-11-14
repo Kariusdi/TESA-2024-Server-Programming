@@ -6,12 +6,14 @@ import Linear from "@/assets/trending-up.png";
 import Dashboard from "@/assets/layers.png";
 import Trello from "@/assets/trello.png";
 import User from "@/assets/user.png";
+import Logs from "@/assets/files.png";
 import { usePathname, useRouter } from "next/navigation";
 
 const menuList = [
   { title: "Dashboard", icon: Dashboard, path: "/main/dashboard" },
-  { title: "Maintenance Logs", icon: Trello, path: "/main/maintenancelogs" },
-  // { title: "Export Summary", icon: Share },
+  { title: "Maintenance", icon: Trello, path: "/main/maintenancelogs" },
+  { title: "Machine Info Logs", icon: Logs, path: "/main/machinelogs" },
+  { title: "Audio logs", icon: Logs, path: "/main/audiologs" },
 ];
 
 const AppMenu: FC = () => {

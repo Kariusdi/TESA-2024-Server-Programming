@@ -29,6 +29,16 @@ const AppDashboard: FC = () => {
   const { timer, machineStatus, modalOpen, setModalOpen, maintenaceDataSet } =
     useStatus();
   const [client, setClient] = useState<mqtt.MqttClient | null>(null);
+  const [ws, setWs] = useState<WebSocket | null>(null);
+  const [time, setTime] = useState<string[]>([]);
+  const [energyConsumption, setEnergyConsumption] = useState<number[]>([]);
+  const [volOne, setVolOne] = useState<number[]>([]);
+  const [volTwo, setVolTwo] = useState<number[]>([]);
+  const [volThree, setVolThree] = useState<number[]>([]);
+  const [cycleCount, setCycleCount] = useState<number[]>([]);
+  const [pressure, setPressure] = useState<number[]>([]);
+  const [force, setForce] = useState<number[]>([]);
+  const [positionPunch, setPositionPunch] = useState<number[]>([]);
 
   useEffect(() => {
     const fetcher = async () => {
@@ -68,17 +78,6 @@ const AppDashboard: FC = () => {
     const saved_timer = localStorage.getItem("timer");
     setLatestUpdated(saved_timer ?? "");
   }, [timer]);
-
-  const [ws, setWs] = useState<WebSocket | null>(null);
-  const [time, setTime] = useState<string[]>([]);
-  const [energyConsumption, setEnergyConsumption] = useState<number[]>([]);
-  const [volOne, setVolOne] = useState<number[]>([]);
-  const [volTwo, setVolTwo] = useState<number[]>([]);
-  const [volThree, setVolThree] = useState<number[]>([]);
-  const [cycleCount, setCycleCount] = useState<number[]>([]);
-  const [pressure, setPressure] = useState<number[]>([]);
-  const [force, setForce] = useState<number[]>([]);
-  const [positionPunch, setPositionPunch] = useState<number[]>([]);
 
   useEffect(() => {
     return () => {
@@ -403,7 +402,7 @@ const AppDashboard: FC = () => {
           <div className="mt-10"></div>
           <div className="w-full h-50">
             <AppSubHeader title="Machine Power and Pressure" />
-            <div className="flex flex-wrap justify-start items-center mt-2">
+            <div className="flex justify-start items-center mt-2">
               <div className="w-[450px] h-auto bg-white rounded-lg p-2 mr-5">
                 <AppLineChart options={powerOptions} data={powerData} />
               </div>

@@ -7,8 +7,8 @@ import { status_poster } from "@/utils/api_methods";
 import mqtt from "mqtt";
 
 interface Message {
-  machine_id: number;
-  sensorVal: number;
+  id: number;
+  status: number;
 }
 
 export const useMaintenance = () => {
@@ -19,7 +19,7 @@ export const useMaintenance = () => {
   const [maintenaceDataSet, setMaintenaceDataSet] = useState<
     { id: number; status: number }[]
   >([]);
-  const [messages, setMessages] = useState<{ id: number; sensorVal: number }>();
+  const [messages, setMessages] = useState<{ id: number; status: number }>();
   const [client, setClient] = useState<mqtt.MqttClient | null>(null);
 
   // useEffect(() => {
@@ -77,10 +77,13 @@ export const useMaintenance = () => {
           //   `Machine ID: ${msg.machine_id}, Sensor Value: ${msg.sensorVal}`,
           // ]);
           const data = {
-            id: msg.machine_id,
-            sensorVal: msg.sensorVal,
+            id: msg.id,
+            status: msg.status,
           };
+          const dataList = [data];
+          setTrigger(true);
           setMessages(data);
+          setMachineStatus(dataList);
           console.log(
             `Received message on topic ${topic}: ${JSON.stringify(msg)}`
           );
@@ -103,27 +106,37 @@ export const useMaintenance = () => {
   }, []);
 
   useEffect(() => {
+    // Find any new maintenance records with status -1 that aren't already in maintenaceDataSet
     const newMaintenances = machineStatus.filter(
       (ele) =>
         ele.status === -1 &&
         !maintenaceDataSet.some((item) => item.id === ele.id)
     );
+
     if (newMaintenances.length > 0) {
-      setMaintenaceDataSet((prev) => [...newMaintenances]);
-      const updatedData = newMaintenances.map((item) => ({
-        ...item,
-        date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
-      }));
-      if (trigger === true) {
+      // Update the maintenance dataset with new entries
+      const updatedDataSet = [
+        ...maintenaceDataSet,
+        ...newMaintenances.map((item) => ({
+          ...item,
+          date: dayjs().format("DD/MM/YYYY HH:mm:ssZ[Z]"),
+        })),
+      ];
+
+      setMaintenaceDataSet(updatedDataSet);
+
+      if (trigger) {
         const postData = async () => {
-          await status_poster(updatedData);
+          await status_poster(updatedDataSet);
         };
         postData();
         console.log("Done Post Maintenance Data");
+
+        // Open modal when new data with status -1 comes in
         setModalOpen(true);
       }
     } else {
-      setMaintenaceDataSet([]);
+      // Close the modal if there’s no new data with status -1
       setModalOpen(false);
     }
   }, [machineStatus, trigger]);
