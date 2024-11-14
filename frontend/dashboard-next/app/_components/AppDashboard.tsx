@@ -40,33 +40,33 @@ const AppDashboard: FC = () => {
   const [force, setForce] = useState<number[]>([]);
   const [positionPunch, setPositionPunch] = useState<number[]>([]);
 
-  useEffect(() => {
-    const fetcher = async () => {
-      try {
-        await fetch("http://127.0.0.1:80/db/retrieve", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-          .then(async (res) => {
-            if (res.status === 403) {
-              console.log("Token expired. Redirecting to /");
-              router.replace("/");
-            } else {
-              return await res.json();
-            }
-          })
-          .then((data) => {
-            console.log(data);
-          })
-          .catch((err) => console.log("Error! This Collection is Empty", err));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetcher();
-  }, [router]);
+  // useEffect(() => {
+  //   const fetcher = async () => {
+  //     try {
+  //       await fetch("http://127.0.0.1:80/db/retrieve", {
+  //         method: "GET",
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       })
+  //         .then(async (res) => {
+  //           if (res.status === 403) {
+  //             console.log("Token expired. Redirecting to /");
+  //             router.replace("/");
+  //           } else {
+  //             return await res.json();
+  //           }
+  //         })
+  //         .then((data) => {
+  //           console.log(data);
+  //         })
+  //         .catch((err) => console.log("Error! This Collection is Empty", err));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetcher();
+  // }, [router]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -98,7 +98,7 @@ const AppDashboard: FC = () => {
 
   const handleStart = useCallback(() => {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY ?? "";
-    const socket = new WebSocket("ws://technest.ddns.net:8001/ws");
+    const socket = new WebSocket("ws://158.108.97.12:8000/ws");
 
     socket.onopen = () => {
       socket.send(apiKey);

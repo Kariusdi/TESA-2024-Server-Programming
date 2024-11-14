@@ -3,6 +3,8 @@ import AppHeader from "@/app/_components/AppHeader";
 import React, { useCallback, useEffect, useState } from "react";
 
 const AudioLogs = () => {
+  const [showValidating, setShowValidating] = useState(true);
+  const [showLoading, setShowLoading] = useState(true);
   const [audioSets, setAudioSets] = useState<
     { id: string; filename: string; rate: number; timeStamp: string }[]
   >([]);
@@ -68,6 +70,23 @@ const AudioLogs = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowValidating(false);
+      setShowLoading(false);
+    }, 700);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showLoading || showValidating) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        <div className="loader"></div>
+      </div>
+    );
+  }
+
   return (
     <section className="py-2 px-3 flex flex-col justify-start items-start w-full mx-10">
       <div className="flex justify-between items-center w-full mb-5">
@@ -78,11 +97,15 @@ const AudioLogs = () => {
           key={idx}
           className="w-full h-20 bg-white shadow-lg rounded-[10px] px-10 flex justify-between items-center my-2"
         >
-          <div className="">
-            <p className="text-[12px]">TimeStamp: {ele.timeStamp}</p>
-            <p className="text-2xl font-bold">{ele.filename}</p>
-            <p className="text-sm">Rate: {ele.rate}</p>
+          <div className="flex justify-center items-center space-x-10">
+            <div className="text-3xl">🔊 </div>
+            <div className="">
+              <p className="text-[12px]">TimeStamp: {ele.timeStamp}</p>
+              <p className="text-2xl font-bold">{ele.filename}</p>
+              <p className="text-[12px] mt-1">Sampling Rate: {ele.rate}</p>
+            </div>
           </div>
+
           <div
             onClick={() => handleDownload(ele.filename)}
             className="bg-green-500 p-3 rounded-xl font-bold cursor-pointer hover:bg-green-900 hover:text-white"

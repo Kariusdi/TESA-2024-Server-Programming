@@ -4,6 +4,7 @@ import AppHeader from "./AppHeader";
 import AppHealthStatus from "./AppHealthStatus";
 // import { socket } from "@/utils/sockets";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import MqttButton from "./AppMQTTButton";
 
 interface AppSummaryProps {
   handleStart: () => void;
@@ -26,7 +27,7 @@ const AppSummary: FC<AppSummaryProps> = ({ handleStart, handleStop }) => {
                   setButtonState(true);
                   handleStart();
                 }}
-                className="py-2 px-5 cursor-pointer bg-green-500 hover:bg-green-700 text-white font-bold rounded-full mt-3 mb-5 w-[125px] h-[125px] flex justify-center items-center shadow-lg"
+                className="py-2 px-5 cursor-pointer bg-green-500 hover:bg-green-700 text-white font-bold rounded-full mt-3 mb-5 w-[125px] h-[125px] flex justify-center items-center shadow-lg active:bg-red-500 active:shadow-inner"
               >
                 <p>Connect</p>
               </div>
@@ -36,19 +37,16 @@ const AppSummary: FC<AppSummaryProps> = ({ handleStart, handleStop }) => {
                   setButtonState(false);
                   handleStop();
                 }}
-                className="py-2 px-5 cursor-pointer bg-red-500 hover:bg-red-700 text-white font-bold rounded-full mt-3 mb-5 w-[125px] h-[125px] flex justify-center items-center shadow-inner"
+                className="py-2 px-5 cursor-pointer bg-red-500 hover:bg-red-700 text-white font-bold rounded-full mt-3 mb-5 w-[125px] h-[125px] flex justify-center items-center shadow-inner active:bg-green-500 active:shadow-lg"
               >
                 <p>Disconnect</p>
               </div>
             )}
-
-            {/* <input
-              type="button"
-              value="Stop"
-              onClick={handleStop}
-              className="py-2 px-5 bg-red-500 hover:bg-red-800 text-white font-bold rounded-lg mt-3 mb-5"
-            /> */}
           </div>
+          <MqttButton
+            brokerUrl={"ws://localhost:9001"}
+            topic={"prediction/1"}
+          />
         </div>
       </div>
     </section>
