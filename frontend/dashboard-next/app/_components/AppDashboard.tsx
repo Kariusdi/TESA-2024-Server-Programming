@@ -16,9 +16,42 @@ import AppLineChart from "./AppLineChart";
 import dayjs from "dayjs";
 import { MachineInfo } from "@/types/types";
 
+const samplingOptions = {
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "", // Set x-axis label here
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: "Sound", // Optionally, set y-axis label as well
+      },
+    },
+  },
+  pan: {
+    enabled: true,
+    mode: "xy",
+  },
+  zoom: {
+    enabled: true,
+    mode: "x",
+  },
+};
+
 interface Message {
   id: number;
   status: number;
+}
+
+interface SoundData {
+  dataList: number[];
+  filename: string;
+  id: string;
+  rate: number;
+  timeStamp: string;
 }
 
 const AppDashboard: FC = () => {
@@ -71,7 +104,7 @@ const AppDashboard: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
-    }, 700);
+    }, 900);
   }, []);
 
   useEffect(() => {
@@ -161,13 +194,13 @@ const AppDashboard: FC = () => {
       x: {
         title: {
           display: true,
-          text: "Time", // Set x-axis label here
+          text: "Time",
         },
       },
       y: {
         title: {
           display: true,
-          text: "Power", // Optionally, set y-axis label as well
+          text: "Power",
         },
       },
     },
@@ -357,6 +390,56 @@ const AppDashboard: FC = () => {
     };
   }, [time, positionPunch]);
 
+  const [soundData, setSoundData] = useState<SoundData[]>([]);
+  const [sampling, setSampling] = useState<number[]>([]);
+  useEffect(() => {
+    const fetcher = async () => {
+      try {
+        await fetch("http://127.0.0.1:80/audio/get_all", {
+          method: "GET",
+        })
+          .then(async (res) => {
+            if (res.status === 403) {
+              console.log("Token expired. Redirecting to /");
+            } else {
+              return await res.json();
+            }
+          })
+          .then((data) => {
+            console.log(data.data[0]);
+            setSoundData(data.data[0]);
+            // setSampling(data.data[0][0].dataList);
+          })
+          .catch((err) => console.log("Error! This Collection is Empty", err));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetcher();
+  }, []);
+
+  useEffect(() => {
+    if (soundData[0]) {
+      setSampling(soundData[0]?.dataList);
+      console.log(soundData[0]?.dataList);
+    }
+  }, [soundData]);
+
+  const samplingData = useMemo(() => {
+    return {
+      labels: Array.from({ length: sampling.length }, (_, i) => i),
+      datasets: [
+        {
+          label: "Sampling",
+          data: sampling,
+          borderColor: "rgb(248, 95, 63)",
+          backgroundColor: "rgba(255, 0, 0, 0.2)",
+          fill: true,
+        },
+      ],
+    };
+  }, [sampling]); // Changed dependencies to only `sampling`
+
   if (loader) {
     return (
       <div className="flex justify-center items-center w-full h-screen">
@@ -439,6 +522,7 @@ const AppDashboard: FC = () => {
               <AppStatusMap statusSet={machineStatus} />
             </div>
           </div>
+          {/* <AppLineChart options={samplingOptions} data={samplingData} /> */}
         </section>
         <div className="h-screen w-[240px] flex-shrink" />
         <div className="fixed right-0 top-0 h-screen overflow-hidden">
