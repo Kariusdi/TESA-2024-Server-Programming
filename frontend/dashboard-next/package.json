@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "chart.js": "^4.4.5",
+    "chartjs-plugin-zoom": "^2.0.1",
     "dayjs": "^1.11.13",
+    "mqtt": "^5.10.2",
     "next": "15.0.1",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-chartjs-2": "^5.2.0",

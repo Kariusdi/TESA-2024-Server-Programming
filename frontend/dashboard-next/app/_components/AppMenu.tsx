@@ -31,7 +31,7 @@ const AppMenu: FC = () => {
               quality={100}
             />
             <div>
-              <h3>LinearOnly</h3>
+              <h3>Lintech</h3>
               <h3>Group</h3>
               <h3>CDTI</h3>
             </div>

@@ -13,7 +13,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
           <AppMenu />
         </div>
         <div className="flex flex-grow justify-center items-start">
-          <div className="h-screen w-[220px] flex-shrink" />
+          <div className="h-screen w-[200px] flex-shrink" />
           {children}
         </div>
       </main>

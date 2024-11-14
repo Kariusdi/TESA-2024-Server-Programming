@@ -5,13 +5,9 @@ import dayjs from "dayjs";
 import { useSensors } from "@/hooks/useSensors";
 import { status_poster } from "@/utils/api_methods";
 import mqtt from "mqtt";
+import { Message } from "@/types/types";
 
-interface Message {
-  machine_id: number;
-  sensorVal: number;
-}
-
-export const useMaintenance = () => {
+export const useStatus = () => {
   const [timer, setTimer] = useState<string>("");
   const { machineStatus, setMachineStatus } = useLocalStorage();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -19,43 +15,12 @@ export const useMaintenance = () => {
   const [maintenaceDataSet, setMaintenaceDataSet] = useState<
     { id: number; status: number }[]
   >([]);
-  const [messages, setMessages] = useState<{ id: number; sensorVal: number }>();
   const [client, setClient] = useState<mqtt.MqttClient | null>(null);
 
-  // useEffect(() => {
-  //   function onConnect() {
-  //     console.log("Socket Connected");
-  //   }
-
-  //   function onDisconnect() {
-  //     console.log("Socket Disconnected");
-  //   }
-
-  //   socket.on("connect", onConnect);
-  //   socket.on("disconnect", onDisconnect);
-  //   socket.on("machine_status", (data) => {
-  //     setTrigger(true);
-  //     setMachineStatus(data);
-  //     setTimer(dayjs().format("DD/MM/YYYY HH:mm:ss"));
-  //     localStorage.setItem("timer", dayjs().format("DD/MM/YYYY HH:mm:ss"));
-  //     localStorage.setItem("latestStatus", JSON.stringify(data));
-  //   });
-
-  //   return () => {
-  //     socket.off("connect", onConnect);
-  //     socket.off("disconnect", onDisconnect);
-  //     socket.off("machine_status", (data) => {
-  //       setMachineStatus(data["data"]);
-  //       setTimer("");
-  //     });
-  //   };
-  // }, [machineStatus]);
-
   useEffect(() => {
-    // Initialize the MQTT client when the component mounts
     const mqttClient = mqtt.connect("mqtt://localhost:9001", {
-      username: "LinearOnly-Pon", // optional
-      password: "1q2w3e4r", // optional
+      username: "LinearOnly-Pon",
+      password: "1q2w3e4r",
     });
 
     mqttClient.on("connect", () => {
@@ -67,40 +32,36 @@ export const useMaintenance = () => {
           console.log(`Subscribed to topic: lintech/machines/status`);
         }
       });
+    });
 
-      // Attach message handler only once after connecting
-      mqttClient.on("message", (topic: string, payload: Buffer) => {
-        try {
-          const msg: Message = JSON.parse(payload.toString());
-          // setMessages((prevMessages) => [
-          //   ...prevMessages,
-          //   `Machine ID: ${msg.machine_id}, Sensor Value: ${msg.sensorVal}`,
-          // ]);
-          const data = {
-            id: msg.machine_id,
-            sensorVal: msg.sensorVal,
-          };
-          setMessages(data);
-          console.log(
-            `Received message on topic ${topic}: ${JSON.stringify(msg)}`
-          );
-        } catch (error) {
-          console.error("Failed to parse message:", error);
-        }
-      });
+    mqttClient.on("message", (topic: string, payload: Buffer) => {
+      try {
+        const msg: Message = JSON.parse(payload.toString());
+        const data = {
+          id: msg.id,
+          status: msg.status,
+        };
+        setMachineStatus([data]);
+        setTimer(dayjs().format("DD/MM/YYYY HH:mm:ss"));
+        localStorage.setItem("timer", dayjs().format("DD/MM/YYYY HH:mm:ss"));
+        localStorage.setItem("latestStatus", JSON.stringify([data]));
+      } catch (error) {
+        console.error("Failed to parse message:", error);
+      }
     });
 
     mqttClient.on("error", (error) => {
       console.error("Connection error:", error);
     });
 
-    // Clean up connection on component unmount
     return () => {
       if (mqttClient) {
         mqttClient.end();
       }
     };
   }, []);
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const newMaintenances = machineStatus.filter(
@@ -129,7 +90,6 @@ export const useMaintenance = () => {
   }, [machineStatus, trigger]);
 
   return {
-    messages,
     timer,
     machineStatus,
     modalOpen,

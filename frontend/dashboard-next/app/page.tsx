@@ -12,6 +12,7 @@ interface FormData {
 
 const LoginPage: FC = () => {
   const [notMatched, setNotMatched] = useState<boolean>(false);
+  const [data, setData] = useState("");
   const router = useRouter();
   const {
     register,
@@ -20,14 +21,32 @@ const LoginPage: FC = () => {
   } = useForm<FormData>();
 
   const formSubmit = useCallback(
-    (data: FormData) => {
-      if (data.username === "admin" && data.password === "1q2w3e4r") {
-        router.push("/main/dashboard");
-      } else {
-        setNotMatched(true);
-      }
+    async (data: FormData) => {
+      const body = {
+        fullname: data.username,
+        password: data.password,
+      };
+
+      await fetch("http://127.0.0.1:80/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.access_token);
+          localStorage.setItem("token", data.access_token);
+          router.push("/main/dashboard");
+        })
+        .catch((err) => {
+          setNotMatched(true);
+          console.log("Error!", err);
+          throw err;
+        });
     },
-    [notMatched]
+    [notMatched, data]
   );
 
   const imageLoader = useCallback(
@@ -42,6 +61,7 @@ const LoginPage: FC = () => {
       <form onSubmit={handleSubmit(formSubmit)}>
         <div className="flex h-[648px] w-[969px] bg-white shadow-lg rounded-[25px]">
           <div className="relative h-full w-1/2">
+            <p>{data}</p>
             <Image
               loader={imageLoader}
               src="TRS-mesurervotreperformancemachine-scaled.jpeg"

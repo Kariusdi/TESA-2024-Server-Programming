@@ -21,7 +21,7 @@ interface AppStatusMapProps {
 const AppStatusMap: FC<AppStatusMapProps> = ({ statusSet }) => {
   const positions = useMemo(() => {
     return [
-      { vertical: "top-[4px]", horizontal: "left-[480px]", direction: "right" },
+      { vertical: "top-[4px]", horizontal: "left-[450px]", direction: "right" },
       {
         vertical: "top-[80px]",
         horizontal: "right-[540px]",
@@ -59,7 +59,7 @@ const AppStatusMap: FC<AppStatusMapProps> = ({ statusSet }) => {
   );
 
   return (
-    <div className="h-auto w-[920px] rounded-2xl relative">
+    <div className="h-[540px] w-[870px] rounded-2xl relative">
       <Image
         src={Industry}
         alt="industry"

@@ -35,3 +35,29 @@ export interface AppKPIProps {
   timestamp: string;
   sensorValue: number;
 }
+
+export interface Message {
+  id: number;
+  status: number;
+}
+
+interface MachinesVol {
+  "L1-GND": number;
+  "L2-GND": number;
+  "L3-GND": number;
+}
+
+export interface MachineInfo {
+  ["Cycle Count"]: number;
+  ["Energy Consumption"]: {
+    Power: number;
+  };
+  Force: number;
+  ["Position of the Punch"]: number;
+  Pressure: number;
+  Voltage: MachinesVol;
+}
+
+interface CycleCount {
+  CycleCount: number;
+}
